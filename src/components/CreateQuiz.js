@@ -20,13 +20,14 @@ import Typography from "@mui/material/Typography";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { useNavigate } from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "90%", // Adjusted width for responsiveness
+  width: { sm: "90%", xs: "70%" }, // Adjusted width for responsiveness
   maxWidth: 400, // Maximum width to maintain readability
   bgcolor: "background.paper",
   border: "2px solid #000",
@@ -71,6 +72,28 @@ const Form = ({ editFormVisibility }) => {
     e.preventDefault();
     let date = new Date();
     let time = date.getTime();
+    // Get date components
+    let day = date.getDate();
+    let month = date.getMonth() + 1; // Month starts from 0
+    let year = date.getFullYear();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let amPM = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12; // Convert hours to 12-hour format
+    let createdTime =
+      day +
+      "/" +
+      month +
+      "/" +
+      year +
+      " " +
+      hours +
+      ":" +
+      minutes +
+      ":" +
+      " " +
+      amPM;
+    console.log(createdTime);
 
     // validation logic...
 
@@ -139,6 +162,7 @@ const Form = ({ editFormVisibility }) => {
       description: description,
       questions: allQuestions,
       completed: true,
+      creattime: createdTime,
     };
 
     setQuizValue("");
@@ -203,7 +227,7 @@ const Form = ({ editFormVisibility }) => {
 
   return (
     <Box>
-      {titleError && <Box style={{ color: "red" }}>{titleError}</Box>}
+      {/* {titleError && <Box style={{ color: "red" }}>{titleError}</Box>} */}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -268,12 +292,14 @@ const Form = ({ editFormVisibility }) => {
         // >
         <FormControl
           sx={{
-            width: "60%",
+            width: { sm: "60%", xs: "90%" },
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
             margin: "20px auto",
+            // height: "80%",
+            // fontSize: "90%",
           }}
           component="form"
           onSubmit={handleSubmit}
@@ -315,6 +341,8 @@ const Form = ({ editFormVisibility }) => {
                         display: "flex",
                         alignItems: "center",
                         marginBottom: "8px",
+
+                        // alignItems: "flex-start",
                       }}
                     >
                       {/* <input
@@ -347,19 +375,26 @@ const Form = ({ editFormVisibility }) => {
                         disabled
                       />
                       <Button
-                        variant="outlined"
+                        sx={{
+                          padding: "10px 0px",
+                          // fontSize: { sm: "100%", xs: "70%" },
+                          // fontSize: "0.74rem",
+                          // // lineHeight: "1.76",
+                          // letterSpacing: 0,
+                        }}
+                        // variant="outlined"
                         onClick={() =>
                           handleDeleteAnswerOption(index, answerIndex)
                         }
                       >
-                        Delete
+                        <DeleteIcon />
                       </Button>
                     </Box>
                   </Box>
                 ))}
                 <Box style={{ display: "flex", alignItems: "flex-start" }}>
                   <TextField
-                    label="Add Answer Option"
+                    label="Answer Option"
                     variant="outlined"
                     fullWidth
                     value={answerOptionInputs[index]}
@@ -367,23 +402,36 @@ const Form = ({ editFormVisibility }) => {
                     sx={{ mb: 2 }}
                   />
                   <Button
+                    sx={{
+                      fontSize: "0.74rem",
+                      lineHeight: "1.76",
+                      letterSpacing: "0",
+                      marginLeft: "10px",
+                    }}
                     variant="outlined"
                     onClick={() => handleAddAnswerOption(index)}
                   >
-                    Add Answer Option
+                    Add Answer
                   </Button>
                 </Box>
               </Box>
             ))}
 
-            <Button variant="outlined" onClick={handleAddQuestion}>
+            <Button
+              variant="outlined"
+              sx={{
+                width: { sm: "10rem", xs: "100%" },
+              }}
+              onClick={handleAddQuestion}
+            >
               Add Question
             </Button>
             <br />
+            {titleError && <Box style={{ color: "red" }}>{titleError}</Box>}
             <Button
               sx={{
                 mt: "2",
-                width: "10rem",
+                width: { sm: "10rem", xs: "100%" },
               }}
               type="submit"
               variant="contained"

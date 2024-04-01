@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { handleEditSubmit } from "./redux/todoapp/actions";
 import PlayQuizHome from "./components/PlayQuizHome";
 import PlayQuiz from "./components/PlayQuiz";
+import Result from "./components/Result";
 
 function App() {
   const dispatch = useDispatch();
@@ -101,6 +102,7 @@ function App() {
       description: editDes,
       questions: allQuestions,
       completed: switchvalue,
+      creattime: editQuiz.creattime,
       // questions: allQuestions, // Add all the questions and answer options to the todoObj
     };
     dispatch(handleEditSubmit(editedObj));
@@ -156,8 +158,6 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-
-      {/* <Form/> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -217,8 +217,13 @@ function App() {
             />
           }
         />
-        {/* <Route path="/quiz/:id" element={Quiz} />
-        <Route path="/result" element={Result} /> */}
+        {/* <Route path="/quiz/:id" element={Quiz} />*/}
+        <Route
+          path="/result"
+          element={
+            <Result score={score} TotalQuestion={questionsplay.length} />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

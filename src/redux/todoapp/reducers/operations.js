@@ -12,6 +12,7 @@ const initialState = [
     todo: "Buy Laptop",
     completed: true,
     description: "Need to buy a new laptop for work.",
+    creattime: "1/4/2024 3:35: PM",
     questions: [
       {
         question: "Which brand are you considering?",
@@ -68,6 +69,7 @@ const initialState = [
     todo: "Master Redux",
     completed: false,
     description: "Learn Redux for state management.",
+    creattime: "1/4/2024 3:35: PM",
     questions: [
       {
         question: "What is Redux?",
@@ -92,9 +94,10 @@ const initialState = [
   },
   {
     id: 3,
-    todo: "Watering",
+    todo: "Watering here",
     completed: true,
     description: "Water the plants in the garden.",
+    creattime: "1/4/2024 3:35: PM",
     questions: [
       {
         question: "How often do you water the plants?",

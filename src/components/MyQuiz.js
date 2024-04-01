@@ -28,11 +28,13 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CloseIcon from "@mui/icons-material/Close";
 
 const styleforresponsive = {
   width: { xs: "5ch", sm: "10" },
   fontSize: { xs: "0.72rem", sm: "0.875rem", lg: "1.1rem" },
   padding: { xs: "2px", sm: "16px" },
+  // borderRight: "2px solid black",
 };
 
 const Todos = ({
@@ -129,17 +131,32 @@ const Todos = ({
             transform: "translateX( -50%)",
             width: { xs: "92%", md: "70%", lg: "60%" }, // Adjust width for different screen sizes
             bgcolor: "background.paper",
-            border: "2px solid #000",
+            // border: "2px solid #000",
             boxShadow: 24,
             p: 4,
-            overflowY: "auto", // Enable vertical scrolling if needed
+            // overflowY: "auto", // Enable vertical scrolling if needed
             fontSize: "1rem", // Default font size
             "@media (max-width:600px)": {
               width: "90%", // Adjust width for small screens
             },
             "@media (max-width:400px)": {
-              width: "100%", // Adjust width for extra small screens
+              width: "85%", // Adjust width for extra small screens
               fontSize: "0.72rem", // Font size for extra small screens (xs)
+            },
+            "@media (max-width:300px)": {
+              width: "90%", // Adjust width for extra small screens
+              // fontSize: "0.72rem", // Font size for extra small screens (xs)
+            },
+            "@media (max-width:350px)": {
+              width: "100%", // Adjust width for extra small screens
+              // fontSize: "0.72rem", // Font size for extra small screens (xs)
+            },
+            "@media (max-width:285px)": {
+              width: "100%", // Adjust width for extra small screens
+
+              padding: 0,
+
+              // fontSize: "0.72rem", // Font size for extra small screens (xs)
             },
           }}
         >
@@ -149,17 +166,19 @@ const Todos = ({
             to="/new"
             display="block"
             gutterBottom
+            sx={{ textAlign: "right", textDecoration: "none" }}
           >
             Create new Quiz
           </Typography>
           <TableContainer
             sx={{
               overflow: "auto",
+              border: "2px solid grey",
             }}
             component={Paper}
           >
             <Table sx={{ minWidth: 300 }} aria-label="simple table">
-              <TableHead>
+              <TableHead sx={{ borderBottom: "2px solid black" }}>
                 <TableRow>
                   <TableCell sx={styleforresponsive}>Quiz no.</TableCell>
                   <TableCell sx={styleforresponsive} align="right">
@@ -193,7 +212,7 @@ const Todos = ({
                       {todo.todo}
                     </TableCell>
                     <TableCell sx={styleforresponsive} align="right">
-                      {todo.completed ? "completed" : "Incomplete"}
+                      {todo.completed ? "Active" : "Inactive"}
                       <Switch
                         sx={{
                           fontSize: { xs: "0.72rem", sm: "0.875rem" },
@@ -205,7 +224,7 @@ const Todos = ({
                       />
                     </TableCell>
                     <TableCell sx={styleforresponsive} align="right">
-                      {new Date(todo.id).toLocaleDateString()}
+                      {todo.creattime}
                     </TableCell>
                     <TableCell sx={styleforresponsive} align="right">
                       {editFormVisibility === false && (
@@ -334,7 +353,7 @@ const Todos = ({
               bgcolor: "background.paper",
               border: "2px solid #000",
               boxShadow: 24,
-              p: 4,
+              p: { sm: 4, xs: 2 },
               overflowY: "auto",
               maxHeight: "90vh", // Limit the maximum height to 90% of the viewport height
               maxWidth: "90vw", // Limit the maximum width to 90% of the viewport width
@@ -347,10 +366,18 @@ const Todos = ({
             >
               <FormGroup sx={{ width: "100%" }}>
                 {/* <form onSubmit={editSubmit}> */}
-                {editError && <Box style={{ color: "red" }}>{editError}</Box>}
-                <label>Update your Quiz</label>
+                {/* {editError && <Box style={{ color: "red" }}>{editError}</Box>} */}
+                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                  <CloseIcon onClick={cancelUpdate} />
+                </Box>
+
+                <Typography sx={{ textAlign: "center" }} component="h5">
+                  Update your Quiz
+                </Typography>
+
                 <Box>
                   <TextField
+                    label="Title"
                     variant="outlined"
                     fullWidth
                     value={editValue || ""}
@@ -358,6 +385,7 @@ const Todos = ({
                     sx={{ mb: 2 }}
                   />
                   <TextField
+                    label="Description"
                     variant="outlined"
                     fullWidth
                     value={editDes || ""}
@@ -365,7 +393,14 @@ const Todos = ({
                     sx={{ mb: 2 }}
                   />
                   {questions.map((question, index) => (
-                    <Box key={index}>
+                    <Box
+                      key={index}
+                      sx={{
+                        mb: 2,
+                        p: { sm: 3, xs: 1.5 },
+                        border: "2px solid grey",
+                      }}
+                    >
                       <TextField
                         label={`Question ${index + 1}`}
                         variant="outlined"
@@ -377,7 +412,18 @@ const Todos = ({
                         sx={{ mb: 2 }}
                       />
                       {question.answerOptions.map((option, answerIndex) => (
-                        <Box key={answerIndex}>
+                        <Box key={answerIndex} sx={{ mb: 2, display: "flex" }}>
+                          <IconButton
+                            onClick={() =>
+                              handleCheckboxChangeE(index, answerIndex)
+                            }
+                          >
+                            {option.checked ? (
+                              <CheckCircleIcon sx={{ color: "#008DDA" }} />
+                            ) : (
+                              <RadioButtonUncheckedIcon />
+                            )}
+                          </IconButton>
                           <TextField
                             label={`Answer Option ${answerIndex + 1}`}
                             variant="outlined"
@@ -390,7 +436,7 @@ const Todos = ({
                                 e.target.value
                               )
                             }
-                            sx={{ mb: 2 }}
+                            // sx={{ mb: 2 }}
                           />
                           {/* <input
                           type="radio"
@@ -399,7 +445,7 @@ const Todos = ({
                             handleCheckboxChangeE(index, answerIndex)
                           }
                         /> */}
-                          <IconButton
+                          {/* <IconButton
                             onClick={() =>
                               handleCheckboxChangeE(index, answerIndex)
                             }
@@ -409,28 +455,39 @@ const Todos = ({
                             ) : (
                               <RadioButtonUncheckedIcon />
                             )}
-                          </IconButton>
-                          <label>Correct Answer</label>
+                          </IconButton> */}
+                          {/* <label>Correct Answer</label> */}
                         </Box>
                       ))}
-                      <Button onClick={() => handleAddAnswerOption(index)}>
-                        Add Answer Option
-                      </Button>
                       <Button
+                        sx={{ mr: 1, mb: 1 }}
+                        variant="outlined"
+                        onClick={() => handleAddAnswerOption(index)}
+                      >
+                        Add Answer
+                      </Button>
+                      <br />
+                      <Button
+                        variant="outlined"
                         onClick={() => handleDeleteQuestionAndDispatch(index)}
                       >
-                        Delete Question
+                        <DeleteIcon variant="contained" />
                       </Button>
                     </Box>
                   ))}
 
-                  <Button onClick={handleAddQuestion}>Add Question</Button>
-                  <Button variant="outlined" type="submit">
+                  <Button sx={{ mb: 2 }} onClick={handleAddQuestion}>
+                    Add Question
+                  </Button>
+                  <br />
+                  {editError && <Box style={{ color: "red" }}>{editError}</Box>}
+                  <Button sx={{ mb: 2 }} variant="contained" type="submit">
                     UPDATE
                   </Button>
-                  <Button variant="outlined" onClick={cancelUpdate}>
-                    Cancel Update
-                  </Button>
+                  <br />
+                  {/* <Button variant="outlined" onClick={cancelUpdate}>
+                    <CloseIcon />
+                  </Button> */}
                 </Box>
                 {/* </form> */}
               </FormGroup>

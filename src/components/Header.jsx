@@ -18,9 +18,10 @@ const Header = () => {
           sx={{
             color: "inherit",
             "&:hover": { color: "green" },
-            marginRight: "20px",
+            marginRight: "10px",
             textTransform: "none",
-            fontSize: "1.1rem",
+            fontSize: { sm: "1.1rem", xs: "0.9rem" },
+            padding: { sm: 1, xs: 0 },
           }}
         >
           Home
@@ -32,9 +33,10 @@ const Header = () => {
           sx={{
             color: "inherit",
             "&:hover": { color: "green" },
-            marginRight: "20px",
+            marginRight: "10px",
             textTransform: "none",
-            fontSize: "1.1rem",
+            fontSize: { sm: "1.1rem", xs: "0.9rem" },
+            padding: { sm: 1, xs: 0 },
           }}
         >
           My Quizzes
@@ -46,9 +48,10 @@ const Header = () => {
           sx={{
             color: "inherit",
             "&:hover": { color: "green" },
-            marginRight: "20px",
+            // marginRight: "10px",
             textTransform: "none",
-            fontSize: "1.1rem",
+            fontSize: { sm: "1.1rem", xs: "0.9rem" },
+            padding: { sm: 1, xs: 0 },
           }}
         >
           playquiz

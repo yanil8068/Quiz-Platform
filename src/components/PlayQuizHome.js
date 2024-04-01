@@ -74,6 +74,7 @@ const PlayQuizHome = ({
       sx={{
         mt: 2,
         position: "absolute",
+        boxShadow: 24,
         // top: "50%",
         left: "50%",
         transform: "translateX(-50%)",
@@ -86,8 +87,12 @@ const PlayQuizHome = ({
           width: "90%", // Adjust width for small screens
         },
         "@media (max-width:400px)": {
+          width: "80%", // Adjust width for extra small screens
+          fontSize: "0.73rem", // Font size for extra small screens (xs)
+        },
+        "@media (max-width:350px)": {
           width: "100%", // Adjust width for extra small screens
-          fontSize: "0.72rem", // Font size for extra small screens (xs)
+          fontSize: "0.73rem", // Font size for extra small screens (xs)
         },
       }}
       noValidate
@@ -99,6 +104,7 @@ const PlayQuizHome = ({
         variant="outlined"
         onChange={handleNameChange}
         fullWidth
+        sx={{ mb: 2 }}
       />
 
       <TableContainer component={Paper}>
@@ -117,13 +123,13 @@ const PlayQuizHome = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {completedQuizzes.map((todo) => (
+            {completedQuizzes.map((todo, index) => (
               <TableRow
                 key={todo.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell sx={styleforresponsive} align="center">
-                  {todo.id}
+                  {index + 1}
                 </TableCell>
                 <TableCell sx={styleforresponsive} align="center">
                   {todo.todo}
@@ -133,7 +139,7 @@ const PlayQuizHome = ({
                     variant="contained"
                     onClick={(event) => handleEditClickplay(todo, event)}
                   >
-                    Play
+                    Start Quiz
                   </Button>
                 </TableCell>
               </TableRow>

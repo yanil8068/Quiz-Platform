@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import congratulations from "../assets/congratulations.png";
 
-const Result = ({ score }) => {
+const Result = ({ score, TotalQuestion }) => {
   return (
     <Box
       sx={{
@@ -16,12 +16,12 @@ const Result = ({ score }) => {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "50vh",
+        m: 3,
       }}
     >
-      <Typography variant="h4" gutterBottom>
-        result {score}
-      </Typography>
-      <Card sx={{ width: { xs: "90%", md: "45%" }, overflow: "visible" }}>
+      <Card
+        sx={{ width: { xs: "90%", md: "45%" }, mb: 1, overflow: "visible" }}
+      >
         <CardActionArea>
           <CardMedia
             component="img"
@@ -31,6 +31,9 @@ const Result = ({ score }) => {
           />
         </CardActionArea>
       </Card>
+      <Typography variant="h4" gutterBottom>
+        You have scored {score} out of {TotalQuestion}
+      </Typography>
     </Box>
   );
 };

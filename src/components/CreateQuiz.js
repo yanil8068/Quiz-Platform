@@ -51,9 +51,18 @@ const Form = ({ editFormVisibility }) => {
 
   const handleClosee = () => setOpenn(false);
 
-  const handleRadioChangee = (event) => {
-    setSelectedOption(event.target.value);
-    if (event.target.value === "MCQ(Single Correct)") {
+  // const handleRadioChangee = (event) => {
+  //   setSelectedOption(event.target.value);
+  //   if (event.target.value === "MCQ(Single Correct)") {
+  //     handleClosee();
+  //   } else {
+  //     setSingleMcq(false);
+  //     handleClosee();
+  //   }
+  // };
+  const handleButtonClick = (option) => {
+    setSelectedOption(option);
+    if (option === "MCQ(Single Correct)") {
       handleClosee();
     } else {
       setSingleMcq(false);
@@ -241,7 +250,7 @@ const Form = ({ editFormVisibility }) => {
       >
         <Fade in={openn}>
           <Box sx={style}>
-            <FormControl>
+            {/* <FormControl>
               <FormLabel id="demo-radio-buttons-group-label">
                 <Typography id="modal-modal-title" variant="h5" component="h2">
                   Select Question Type
@@ -273,6 +282,58 @@ const Form = ({ editFormVisibility }) => {
                   label="Description (with 2 or 4 sentences)"
                 />
               </RadioGroup>
+            </FormControl> */}
+            <FormControl>
+              <FormLabel id="demo-radio-buttons-group-label">
+                <Typography id="modal-modal-title" variant="h5" component="h2">
+                  Select Question Type
+                </Typography>
+              </FormLabel>
+              <div>
+                <Button
+                  variant={
+                    selectedOption === "MCQ(Single Correct)"
+                      ? "contained"
+                      : "outlined"
+                  }
+                  onClick={() => handleButtonClick("MCQ(Single Correct)")}
+                >
+                  MCQ(Single Correct)
+                </Button>
+                {/* had created options for other quiz type as well but will show it when those quiz type will be implemented as well */}
+                {/* <Button
+                  variant={
+                    selectedOption === "MCQ(Multi Correct)"
+                      ? "contained"
+                      : "outlined"
+                  }
+                  onClick={() => handleButtonClick("MCQ(Multi Correct)")}
+                >
+                  MCQ(Multi Correct)
+                </Button>
+                <Button
+                  variant={
+                    selectedOption === "ShortAnswer(with 2 words)"
+                      ? "contained"
+                      : "outlined"
+                  }
+                  onClick={() => handleButtonClick("ShortAnswer(with 2 words)")}
+                >
+                  Short Answer (with 2 words)
+                </Button>
+                <Button
+                  variant={
+                    selectedOption === "Description(with 2 or 4 sentences)"
+                      ? "contained"
+                      : "outlined"
+                  }
+                  onClick={() =>
+                    handleButtonClick("Description(with 2 or 4 sentences)")
+                  }
+                >
+                  Description (with 2 or 4 sentences)
+                </Button> */}
+              </div>
             </FormControl>
           </Box>
         </Fade>

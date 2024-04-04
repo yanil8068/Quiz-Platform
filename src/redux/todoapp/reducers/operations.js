@@ -4,7 +4,24 @@ import {
   UPDATE_QUIZ,
   DELETE_QUESTION,
   TOGGLE_QUIZ_COMPLETED,
+  SET_USER,
 } from "../actions";
+
+const initialStat = {
+  currentUser: null,
+};
+
+export const usersReducer = (state = initialStat, actio) => {
+  switch (actio.type) {
+    case SET_USER:
+      return {
+        ...state,
+        currentUser: actio.payload,
+      };
+    default:
+      return state;
+  }
+};
 
 const initialState = [
   {

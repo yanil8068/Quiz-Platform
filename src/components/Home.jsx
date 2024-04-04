@@ -17,6 +17,8 @@ import {
 import newQuizImg from "../assets/createquiz.png";
 import myQuizzesImg from "../assets/myquizzes.png";
 import playquiz from "../assets/PlayQuiz.png";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/config";
 
 const Home = () => {
   return (

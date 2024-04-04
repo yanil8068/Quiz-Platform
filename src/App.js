@@ -9,6 +9,8 @@ import { handleEditSubmit } from "./redux/todoapp/actions";
 import PlayQuizHome from "./components/PlayQuizHome";
 import PlayQuiz from "./components/PlayQuiz";
 import Result from "./components/Result";
+import LoginPage from "./components/LoginPage";
+import { useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,6 +19,10 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [name, setName] = useState("");
   const [score, setScore] = useState(0);
+
+  const user = useSelector((state) => state.usersReducer);
+  console.log(user.currentUser);
+  console.log(`checking ${user}`);
   // const Navigate = useNavigate();
   // Create an array to store all the questions
   const allQuestions = questions.map((question) => {
@@ -156,76 +162,86 @@ function App() {
   }, [editQuiz]);
 
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/new"
-          element={<CreateQuiz editFormVisibility={editFormVisibility} />}
-        />
-        <Route
-          path="/quizzes"
-          element={
-            <MyQuiz
-              handleDeleteQuestion={handleDeleteQuestion}
-              handleEditClick={handleEditClick}
-              editFormVisibility={editFormVisibility}
-              setEditFormVisibility={setEditFormVisibility}
-              cancelUpdate={cancelUpdate}
-              editSubmit={editSubmit}
-              editValue={editValue}
-              setEditValue={setEditValue}
-              editDes={editDes}
-              setEditDes={setEditDes}
-              questions={questions}
-              setQuestions={setQuestions}
-              handleAddAnswerOptionE={handleAddAnswerOptionE}
-              handleQuestionChangeE={handleQuestionChangeE}
-              handleAnswerOptionChangeE={handleAnswerOptionChangeE}
-              handleCheckboxChangeE={handleCheckboxChangeE}
-              switchvalue={switchvalue}
-              setswitchvalue={setswitchvalue}
-              editError={editError}
+    <>
+      {user.currentUser ? (
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route index element={<Home />} />
+
+            {/* <Route path="/login" element={<LoginPage />} /> */}
+
+            <Route
+              path="/new"
+              element={<CreateQuiz editFormVisibility={editFormVisibility} />}
             />
-          }
-        />
-        <Route
-          path="/PlayQuizHome"
-          element={
-            <PlayQuizHome
-              name={name}
-              setName={setName}
-              editQuizplay={editQuizplay}
-              setEditQuizplay={setEditQuizplay}
-              questionsplay={questionsplay}
-              setQuestionsplay={setQuestionsplay}
-              setTitle={setTitle}
+            <Route
+              path="/quizzes"
+              element={
+                <MyQuiz
+                  handleDeleteQuestion={handleDeleteQuestion}
+                  handleEditClick={handleEditClick}
+                  editFormVisibility={editFormVisibility}
+                  setEditFormVisibility={setEditFormVisibility}
+                  cancelUpdate={cancelUpdate}
+                  editSubmit={editSubmit}
+                  editValue={editValue}
+                  setEditValue={setEditValue}
+                  editDes={editDes}
+                  setEditDes={setEditDes}
+                  questions={questions}
+                  setQuestions={setQuestions}
+                  handleAddAnswerOptionE={handleAddAnswerOptionE}
+                  handleQuestionChangeE={handleQuestionChangeE}
+                  handleAnswerOptionChangeE={handleAnswerOptionChangeE}
+                  handleCheckboxChangeE={handleCheckboxChangeE}
+                  switchvalue={switchvalue}
+                  setswitchvalue={setswitchvalue}
+                  editError={editError}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/Quiz"
-          element={
-            <PlayQuiz
-              name={name}
-              score={score}
-              setScore={setScore}
-              questionsplay={questionsplay}
-              setQuestionsplay={setQuestionsplay}
-              title={title}
+            <Route
+              path="/PlayQuizHome"
+              element={
+                <PlayQuizHome
+                  name={name}
+                  setName={setName}
+                  editQuizplay={editQuizplay}
+                  setEditQuizplay={setEditQuizplay}
+                  questionsplay={questionsplay}
+                  setQuestionsplay={setQuestionsplay}
+                  setTitle={setTitle}
+                />
+              }
             />
-          }
-        />
-        {/* <Route path="/quiz/:id" element={Quiz} />*/}
-        <Route
-          path="/result"
-          element={
-            <Result score={score} TotalQuestion={questionsplay.length} />
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+            <Route
+              path="/Quiz"
+              element={
+                <PlayQuiz
+                  name={name}
+                  score={score}
+                  setScore={setScore}
+                  questionsplay={questionsplay}
+                  setQuestionsplay={setQuestionsplay}
+                  title={title}
+                />
+              }
+            />
+            {/* <Route path="/quiz/:id" element={Quiz} />*/}
+            <Route
+              path="/result"
+              element={
+                <Result score={score} TotalQuestion={questionsplay.length} />
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      ) : (
+        <LoginPage />
+      )}
+    </>
   );
 }
 

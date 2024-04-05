@@ -718,6 +718,12 @@ const Form = ({ editFormVisibility }) => {
     setQuestions([]);
     setAnswerOptionInputs([]);
     dispatch(addQuiz(todoObj));
+
+    ////// //1. Save data to local storage
+    const existingQuizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+    const updatedQuizzes = [...existingQuizzes, todoObj];
+    localStorage.setItem("quizzes", JSON.stringify(updatedQuizzes));
+
     handleClosee(); // Close the modal after submitting
     handleOpen();
   };

@@ -90,9 +90,9 @@ const Quiz = ({
       <Box>
         {questionsplay[currQues] ? (
           <Box>
-            {/* <Typography variant="h3" gutterBottom>
-                score : {score}
-              </Typography> */}
+            <Typography sx={{ textAlign: "right" }} variant="h4" gutterBottom>
+              {name}
+            </Typography>
             <Typography
               sx={{
                 textAlign: "center",

@@ -66,6 +66,12 @@ const PlayQuizHome = ({
     setName(newName);
     setIsNameValid(newName.length >= 5 && newName.length <= 50);
   };
+  ////4.to get data from local storage and show here so it also do not get vanished when refreshed
+  const existingQuizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+  const existingCompletedQuizzes = existingQuizzes.filter(
+    (todo) => todo.completed
+  );
+  ////////4.end
 
   return (
     <Box
@@ -123,7 +129,8 @@ const PlayQuizHome = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {completedQuizzes.map((todo, index) => (
+            {/* {completedQuizzes.map((todo, index) => ( */}
+            {existingCompletedQuizzes.map((todo, index) => (
               <TableRow
                 key={todo.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

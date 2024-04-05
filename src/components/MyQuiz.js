@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   removeTodo,
@@ -57,11 +57,16 @@ const Todos = ({
   switchvalue,
   setswitchvalue,
   editError,
+  atLeastOneCorrectAnswerEdit,
+  setAtLeastOneCorrectAnswerEdit,
 }) => {
+  useEffect(() => {
+    setAtLeastOneCorrectAnswerEdit(true);
+  }, []);
   const dispatch = useDispatch();
 
-  // Function to delete a question and its answer options
-  const handleDeleteQuestionAndDispatch = (questionIndex) => {
+  // // Function to delete a question and its answer options
+  const handleDeleteQuestionAndDispatch = (questionIndex, id) => {
     // Dispatch the deleteQuestion action
     dispatch(deleteQuestion(questionIndex));
     // Call the handleDeleteQuestion function to delete the question locally in the component
@@ -69,10 +74,15 @@ const Todos = ({
   };
 
   const handleAddQuestion = () => {
-    setQuestions([
-      ...questions,
-      { question: "", answerOptions: [{ answer: "", checked: false }] },
-    ]);
+    setAtLeastOneCorrectAnswerEdit(false);
+    if (!atLeastOneCorrectAnswerEdit) {
+      return alert("select atleast one correct answer");
+    } else {
+      setQuestions([
+        ...questions,
+        { question: "", answerOptions: [{ answer: "", checked: false }] },
+      ]);
+    }
   };
 
   const handleAddAnswerOption = (questionIndex) => {
@@ -87,6 +97,20 @@ const Todos = ({
   const handleToggleCompleted = (id) => {
     // Dispatch an action to toggle the completed status in the Redux store
     dispatch(toggleQuizCompleted(id));
+
+    // Update the local storage
+    const existingQuizzess = JSON.parse(localStorage.getItem("quizzes")) || [];
+    const updatedQuizzess = existingQuizzess.map((quiz) => {
+      if (quiz.id === id) {
+        // Toggle the completed status for the matching quiz
+        return {
+          ...quiz,
+          completed: !quiz.completed,
+        };
+      }
+      return quiz;
+    });
+    localStorage.setItem("quizzes", JSON.stringify(updatedQuizzess));
   };
 
   const handleCheckboxChangeE = (questionIndex, answerIndex) => {
@@ -103,6 +127,7 @@ const Todos = ({
           })),
         };
       }
+      setAtLeastOneCorrectAnswerEdit(true);
       // For other questions, keep their answer options unchanged
       return question;
     });
@@ -118,6 +143,8 @@ const Todos = ({
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  ////3.getting hold of the quizzes to show on table : working fine
+  const existingQuizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
 
   return (
     <>
@@ -196,7 +223,7 @@ const Todos = ({
                 </TableRow>
               </TableHead>
               <TableBody>
-                {todos.map((todo, index) => (
+                {existingQuizzes.map((todo, index) => (
                   <TableRow
                     key={todo.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -295,6 +322,20 @@ const Todos = ({
                               </Typography>
                               <Button
                                 onClick={() => {
+                                  // Update the local storage
+                                  const existingQuizzesDelete =
+                                    JSON.parse(
+                                      localStorage.getItem("quizzes")
+                                    ) || [];
+                                  const updatedQuizzesDelete =
+                                    existingQuizzesDelete.filter(
+                                      (quiz) => quiz.id !== todo.id
+                                    );
+                                  localStorage.setItem(
+                                    "quizzes",
+                                    JSON.stringify(updatedQuizzesDelete)
+                                  );
+
                                   dispatch(removeTodo(todo.id));
                                   handleClose(); // Close the modal after deleting the quiz
                                 }}
@@ -469,7 +510,9 @@ const Todos = ({
                       <br />
                       <Button
                         variant="outlined"
-                        onClick={() => handleDeleteQuestionAndDispatch(index)}
+                        onClick={() =>
+                          handleDeleteQuestionAndDispatch(index, question.id)
+                        }
                       >
                         <DeleteIcon variant="contained" />
                       </Button>

@@ -6,8 +6,13 @@ import {
   Typography,
 } from "@mui/material";
 import congratulations from "../assets/congratulations.png";
+import { useEffect } from "react";
 
-const Result = ({ score, TotalQuestion }) => {
+const Result = ({ score, TotalQuestion, setName }) => {
+  useEffect(() => {
+    setName(null);
+  }, []);
+
   return (
     <Box
       sx={{

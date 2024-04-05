@@ -19,6 +19,8 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [name, setName] = useState("");
   const [score, setScore] = useState(0);
+  const [atLeastOneCorrectAnswerEdit, setAtLeastOneCorrectAnswerEdit] =
+    useState(false);
 
   const user = useSelector((state) => state.usersReducer);
   console.log(user.currentUser);
@@ -58,6 +60,10 @@ function App() {
 
   const editSubmit = (e) => {
     e.preventDefault();
+    ////Validation for correct option
+    if (!atLeastOneCorrectAnswerEdit) {
+      return alert("select atleast one correct answer");
+    }
 
     // Validation logic for title
     if (editValue.length < 10 || editValue.length > 30) {
@@ -112,6 +118,27 @@ function App() {
       // questions: allQuestions, // Add all the questions and answer options to the todoObj
     };
     dispatch(handleEditSubmit(editedObj));
+    ///2.here i was creating another quiz instead of updating it
+    // const existingQuizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+    // const updatedQuizzes = [...existingQuizzes, editedObj];
+    // localStorage.setItem("quizzes", JSON.stringify(updatedQuizzes));
+    /////new way trying : working fine
+    const existingQuizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+    const quizIndex = existingQuizzes.findIndex(
+      (quiz) => quiz.id === editedObj.id
+    );
+
+    if (quizIndex !== -1) {
+      // If the quiz exists in local storage, update it
+      existingQuizzes[quizIndex] = editedObj;
+      localStorage.setItem("quizzes", JSON.stringify(existingQuizzes));
+    } else {
+      // If the quiz doesn't exist in local storage, add it
+      const updatedQuizzes = [...existingQuizzes, editedObj];
+      localStorage.setItem("quizzes", JSON.stringify(updatedQuizzes));
+    }
+    /////new way trying end
+
     cancelUpdate();
   };
 
@@ -140,12 +167,13 @@ function App() {
     setQuestions(updatedQuestions);
   };
 
-  const handleCheckboxChangeE = (questionIndex, answerIndex) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].answerOptions[answerIndex].checked =
-      !updatedQuestions[questionIndex].answerOptions[answerIndex].checked;
-    setQuestions(updatedQuestions);
-  };
+  // const handleCheckboxChangeE = (questionIndex, answerIndex) => {
+  //   const updatedQuestions = [...questions];
+  //   updatedQuestions[questionIndex].answerOptions[answerIndex].checked =
+  //     !updatedQuestions[questionIndex].answerOptions[answerIndex].checked;
+  //   setQuestions(updatedQuestions);
+  //   // setAtLeastOneCorrectAnswerEdit(true);
+  // };
 
   ////
   const [editQuizplay, setEditQuizplay] = useState("");
@@ -195,10 +223,14 @@ function App() {
                   handleAddAnswerOptionE={handleAddAnswerOptionE}
                   handleQuestionChangeE={handleQuestionChangeE}
                   handleAnswerOptionChangeE={handleAnswerOptionChangeE}
-                  handleCheckboxChangeE={handleCheckboxChangeE}
+                  // handleCheckboxChangeE={handleCheckboxChangeE}
                   switchvalue={switchvalue}
                   setswitchvalue={setswitchvalue}
                   editError={editError}
+                  atLeastOneCorrectAnswerEdit={atLeastOneCorrectAnswerEdit}
+                  setAtLeastOneCorrectAnswerEdit={
+                    setAtLeastOneCorrectAnswerEdit
+                  }
                 />
               }
             />
@@ -233,7 +265,11 @@ function App() {
             <Route
               path="/result"
               element={
-                <Result score={score} TotalQuestion={questionsplay.length} />
+                <Result
+                  score={score}
+                  TotalQuestion={questionsplay.length}
+                  setName={setName}
+                />
               }
             />
           </Routes>

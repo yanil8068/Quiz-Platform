@@ -62,13 +62,18 @@ const Quiz = ({
   return (
     <Box
       sx={{
-        border: "2px solid grey",
-        borderRadius: "8px",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: { xs: "92%", md: "70%", lg: "60%" }, // Adjust width for different screen sizes
+        // border: "2px solid grey",
+        // borderRadius: "8px",
+        minHeight: "85vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        //position: "absolute",
+        // top: "50%",
+        // left: "50%",
+        // transform: "translate(-50%, -50%)",
+        // width: { xs: "92%", md: "70%", lg: "60%" }, // Adjust width for different screen sizes
         bgcolor: "background.paper",
         p: 2,
         overflowY: "auto", // Enable vertical scrolling if needed
@@ -87,11 +92,11 @@ const Quiz = ({
       }}
     >
       {/* {currQues < questionsplay.length ? ( */}
-      <Box>
+      <Box sx={{ width: { xs: "92%", md: "75%", lg: "50%" } }}>
         {questionsplay[currQues] ? (
           <Box>
             <Typography sx={{ textAlign: "right" }} variant="h4" gutterBottom>
-              {name}
+              name: {name}
             </Typography>
             <Typography
               sx={{

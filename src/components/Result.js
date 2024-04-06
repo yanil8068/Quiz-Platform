@@ -20,12 +20,16 @@ const Result = ({ score, TotalQuestion, setName }) => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: "50vh",
-        m: 3,
+        minHeight: "93vh",
+        // m: 3,
       }}
     >
       <Card
-        sx={{ width: { xs: "90%", md: "45%" }, mb: 1, overflow: "visible" }}
+        sx={{
+          width: { xs: "85%", sm: "65%", md: "45%" },
+          mb: 1,
+          overflow: "visible",
+        }}
       >
         <CardActionArea>
           <CardMedia

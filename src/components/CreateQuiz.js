@@ -847,17 +847,25 @@ const Form = ({ editFormVisibility }) => {
       {singleMcq && (
         <FormControl
           sx={{
-            width: { sm: "60%", xs: "90%" },
+            //width: { sm: "60%", xs: "90%" },
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
             margin: "20px auto",
+            // bgcolor: "#D862BC",
+            minHeight: "90vh",
           }}
           component="form"
           onSubmit={handleSubmit}
         >
-          <FormGroup sx={{ width: "100%" }}>
+          <FormGroup
+            sx={{
+              p: 2,
+              border: "2px solid #000",
+              width: { xs: "92%", md: "75%", lg: "50%" },
+            }}
+          >
             <TextField
               label="Title"
               variant="outlined"

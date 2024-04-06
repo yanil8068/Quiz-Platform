@@ -78,26 +78,33 @@ const PlayQuizHome = ({
       component="form"
       onSubmit={(event) => event.preventDefault()} // Prevent form submission on Enter key press
       sx={{
-        mt: 2,
-        position: "absolute",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "90vh",
+        flexDirection: "column",
+
+        //mt: 2,
+        // position: "absolute",
         boxShadow: 24,
         // top: "50%",
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: { xs: "92%", md: "70%", lg: "60%" }, // Adjust width for different screen sizes
+        // left: "50%",
+        // transform: "translateX(-50%)",
+        // width: { xs: "92%", md: "75%", lg: "100%" }, // Adjust width for different screen sizes
         bgcolor: "background.paper",
+        // bgcolor: "#D862BC",
         p: 4,
         overflowY: "auto", // Enable vertical scrolling if needed
         fontSize: "1rem", // Default font size
         "@media (max-width:600px)": {
-          width: "90%", // Adjust width for small screens
+          //width: "90%", // Adjust width for small screens
         },
         "@media (max-width:400px)": {
-          width: "80%", // Adjust width for extra small screens
+          //width: "80%", // Adjust width for extra small screens
           fontSize: "0.73rem", // Font size for extra small screens (xs)
         },
         "@media (max-width:350px)": {
-          width: "100%", // Adjust width for extra small screens
+          // width: "100%", // Adjust width for extra small screens
           fontSize: "0.73rem", // Font size for extra small screens (xs)
         },
       }}
@@ -109,12 +116,33 @@ const PlayQuizHome = ({
         label="Name"
         variant="outlined"
         onChange={handleNameChange}
-        fullWidth
-        sx={{ mb: 2 }}
+        sx={{ mb: 2, width: { xs: "92%", md: "75%", lg: "50%" } }}
       />
 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 300 }} aria-label="simple table">
+      <TableContainer
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          alignContent: "center",
+          minWidth: 300,
+          width: { xs: "92%", md: "75%", lg: "50%" },
+        }}
+        component={Paper}
+      >
+        <Table
+          // sx={{
+          //   display: "flex",
+          //   justifyContent: "center",
+          //   alignItems: "center",
+          //   flexDirection: "column",
+          //   alignContent: "center",
+          //   minWidth: 300,
+          //   width: { xs: "92%", md: "75%", lg: "50%" },
+          // }}
+          aria-label="simple table"
+        >
           <TableHead>
             <TableRow>
               <TableCell sx={styleforresponsive} align="center">

@@ -147,7 +147,7 @@ const Home = () => {
         p: 2,
         pt: "1vh",
         minHeight: "100vh",
-        // backgroundColor: "pink",
+        // bgcolor: "#D862BC",
       }}
     >
       <Card sx={{ width: { xs: "90%", md: "45%" }, overflow: "visible" }}>

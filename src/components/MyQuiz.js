@@ -151,40 +151,47 @@ const Todos = ({
       {editFormVisibility === false ? (
         <Box
           sx={{
-            mt: 2,
-            position: "absolute",
-            // top: "50%",
-            left: "50%",
-            transform: "translateX( -50%)",
-            width: { xs: "92%", md: "70%", lg: "60%" }, // Adjust width for different screen sizes
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "85vh",
+            flexDirection: "column",
+            // padding: { xs: 0 },
+            // mt: 2,
+            // position: "absolute",
+            //// top: "50%",
+            // left: "50%",
+            // transform: "translateX( -50%)",
+            // width: { xs: "92%", md: "70%", lg: "60%" }, // Adjust width for different screen sizes
             bgcolor: "background.paper",
+            // bgcolor: "#D862BC",
             // border: "2px solid #000",
             boxShadow: 24,
             p: 4,
             // overflowY: "auto", // Enable vertical scrolling if needed
             fontSize: "1rem", // Default font size
-            "@media (max-width:600px)": {
-              width: "90%", // Adjust width for small screens
-            },
-            "@media (max-width:400px)": {
-              width: "85%", // Adjust width for extra small screens
-              fontSize: "0.72rem", // Font size for extra small screens (xs)
-            },
-            "@media (max-width:300px)": {
-              width: "90%", // Adjust width for extra small screens
-              // fontSize: "0.72rem", // Font size for extra small screens (xs)
-            },
-            "@media (max-width:350px)": {
-              width: "100%", // Adjust width for extra small screens
-              // fontSize: "0.72rem", // Font size for extra small screens (xs)
-            },
-            "@media (max-width:285px)": {
-              width: "100%", // Adjust width for extra small screens
+            // "@media (max-width:600px)": {
+            //   width: "100%", // Adjust width for small screens
+            // },
+            // "@media (max-width:400px)": {
+            //   width: "90%", // Adjust width for extra small screens
+            //   fontSize: "0.72rem", // Font size for extra small screens (xs)
+            // },
+            // "@media (max-width:300px)": {
+            //   width: "100%", // Adjust width for extra small screens
+            //   // fontSize: "0.72rem", // Font size for extra small screens (xs)
+            // },
+            // "@media (max-width:350px)": {
+            //   width: "100%", // Adjust width for extra small screens
+            //   // fontSize: "0.72rem", // Font size for extra small screens (xs)
+            // },
+            // "@media (max-width:285px)": {
+            //   width: "100%", // Adjust width for extra small screens
 
-              padding: 0,
+            //   padding: 0,
 
-              // fontSize: "0.72rem", // Font size for extra small screens (xs)
-            },
+            //   // fontSize: "0.72rem", // Font size for extra small screens (xs)
+            // },
           }}
         >
           <Typography
@@ -193,7 +200,11 @@ const Todos = ({
             to="/new"
             display="block"
             gutterBottom
-            sx={{ textAlign: "right", textDecoration: "none" }}
+            sx={{
+              textAlign: "right",
+              width: { xs: "100%", md: "75%", lg: "50%" },
+              textDecoration: "none",
+            }}
           >
             Create new Quiz
           </Typography>
@@ -201,6 +212,7 @@ const Todos = ({
             sx={{
               overflow: "auto",
               border: "2px solid grey",
+              width: { xs: "100%", md: "75%", lg: "50%" },
             }}
             component={Paper}
           >
@@ -479,6 +491,7 @@ const Todos = ({
                             }
                             // sx={{ mb: 2 }}
                           />
+                          <Button>delete</Button>
                           {/* <input
                           type="radio"
                           checked={option.checked}

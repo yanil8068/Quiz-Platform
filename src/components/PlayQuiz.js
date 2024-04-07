@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
-const Quiz = ({
+const PlayQuiz = ({
   name,
   score,
   setScore,
@@ -171,4 +171,4 @@ const Quiz = ({
   );
 };
 
-export default Quiz;
+export default PlayQuiz;

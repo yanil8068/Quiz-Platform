@@ -574,7 +574,7 @@ const style = {
   p: 4,
 };
 
-const Form = ({ editFormVisibility }) => {
+const CreateQuiz = ({ editFormVisibility }) => {
   const [questions, setQuestions] = useState([]);
   const [quizValue, setQuizValue] = useState("");
   const [description, setDescription] = useState("");
@@ -1018,4 +1018,4 @@ const Form = ({ editFormVisibility }) => {
   );
 };
 
-export default Form;
+export default CreateQuiz;

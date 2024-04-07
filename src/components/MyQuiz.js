@@ -37,7 +37,7 @@ const styleforresponsive = {
   // borderRight: "2px solid black",
 };
 
-const Todos = ({
+const MyQuiz = ({
   handleDeleteQuestion,
   handleEditClick,
   editFormVisibility,
@@ -555,4 +555,4 @@ const Todos = ({
   );
 };
 
-export default Todos;
+export default MyQuiz;

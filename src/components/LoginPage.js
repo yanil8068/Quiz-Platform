@@ -12,20 +12,7 @@ import { setUser } from "../redux/todoapp/actions";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import {
-  Button,
-  TextField,
-  Backdrop,
-  Modal,
-  Fade,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  FormGroup,
-  FormLabel,
-  IconButton,
-} from "@mui/material";
+import { Button, TextField, FormControl } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -68,8 +55,6 @@ function LoginPage() {
     return () => unsubscribe();
   }, [dispatch]);
 
-  // const selectUser = useSelector((state) => state.operationsReducer);
-
   function handleCredentials(e) {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
     //console.log(userCredentials);
@@ -84,27 +69,14 @@ function LoginPage() {
       auth,
       userCredentials.email,
       userCredentials.password
-    )
-      // .then((userCredential) => {
-      //   // Signed up
-      //   const user = userCredential.user;
-      //   console.log(user);
-      //   dispatch(
-      //     setUser({
-      //       id: userCredential.user.uid,
-      //       email: userCredential.user.email,
-      //     })
-      //   );
-      //   // ...
-      // })
-      .catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        setError(error.message);
-        // console.log(errorCode);
-        //console.log(errorMessage);
-        // ..
-      });
+    ).catch((error) => {
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      setError(error.message);
+      // console.log(errorCode);
+      //console.log(errorMessage);
+      // ..
+    });
   }
 
   function handleLogin(e) {
@@ -114,24 +86,11 @@ function LoginPage() {
       auth,
       userCredentials.email,
       userCredentials.password
-    )
-      // .then((userCredential) => {
-      //   // Signed in
-
-      //   dispatch(
-      //     setUser({
-      //       id: userCredential.user.uid,
-      //       email: userCredential.user.email,
-      //     })
-      //   );
-      //   console.log(userCredential.user);
-      //   // ...
-      // })
-      .catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        setError(error.message);
-      });
+    ).catch((error) => {
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      setError(error.message);
+    });
   }
 
   function handlePasswordReset(e) {
@@ -183,7 +142,7 @@ function LoginPage() {
                 Signup
               </Button>
             </Box>
-            {/* <form className="add-form login"> */}
+
             <FormControl
               sx={{
                 width: { sm: "60%", xs: "90%" },
@@ -192,12 +151,19 @@ function LoginPage() {
                 alignItems: "center",
                 flexDirection: "column",
                 margin: "20px auto",
-                // height: "80%",
-                // fontSize: "90%",
               }}
               component="form"
             >
               <Box className="form-control">
+                {loginType == "login" ? (
+                  <Box sx={{ m: 1 }} fullWidth>
+                    Login Form:{" "}
+                  </Box>
+                ) : (
+                  <Box sx={{ m: 1 }} fullWidth>
+                    Sign Up Form :
+                  </Box>
+                )}
                 <TextField
                   onChange={(e) => {
                     handleCredentials(e);
@@ -209,15 +175,6 @@ function LoginPage() {
                   fullWidth
                   sx={{ mb: 2, marginLeft: "8px" }}
                 />
-
-                {/* <input
-                  onChange={(e) => {
-                    handleCredentials(e);
-                  }}
-                  type="text"
-                  name="email"
-                  placeholder="Enter your email"
-                /> */}
               </Box>
               <Box className="form-control">
                 <TextField
@@ -231,15 +188,6 @@ function LoginPage() {
                   fullWidth
                   sx={{ mb: 2, marginLeft: "8px" }}
                 />
-
-                {/* <input
-                  onChange={(e) => {
-                    handleCredentials(e);
-                  }}
-                  type="password"
-                  name="password"
-                  placeholder="Enter your password"
-                /> */}
               </Box>
               {loginType == "login" ? (
                 <Button

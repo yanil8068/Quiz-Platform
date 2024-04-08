@@ -21,7 +21,6 @@ const Result = ({ score, TotalQuestion, setName }) => {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "93vh",
-        // m: 3,
       }}
     >
       <Card

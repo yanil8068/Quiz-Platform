@@ -34,7 +34,6 @@ const styleforresponsive = {
   width: { xs: "5ch", sm: "10" },
   fontSize: { xs: "0.72rem", sm: "0.875rem", lg: "1.1rem" },
   padding: { xs: "2px", sm: "16px" },
-  // borderRight: "2px solid black",
 };
 
 const MyQuiz = ({
@@ -53,7 +52,7 @@ const MyQuiz = ({
   handleAddAnswerOptionE,
   handleQuestionChangeE,
   handleAnswerOptionChangeE,
-  // handleCheckboxChangeE,
+
   switchvalue,
   setswitchvalue,
   editError,
@@ -156,42 +155,13 @@ const MyQuiz = ({
             alignItems: "center",
             minHeight: "85vh",
             flexDirection: "column",
-            // padding: { xs: 0 },
-            // mt: 2,
-            // position: "absolute",
-            //// top: "50%",
-            // left: "50%",
-            // transform: "translateX( -50%)",
-            // width: { xs: "92%", md: "70%", lg: "60%" }, // Adjust width for different screen sizes
+
             bgcolor: "background.paper",
-            // bgcolor: "#D862BC",
-            // border: "2px solid #000",
+
             boxShadow: 24,
             p: 4,
-            // overflowY: "auto", // Enable vertical scrolling if needed
+
             fontSize: "1rem", // Default font size
-            // "@media (max-width:600px)": {
-            //   width: "100%", // Adjust width for small screens
-            // },
-            // "@media (max-width:400px)": {
-            //   width: "90%", // Adjust width for extra small screens
-            //   fontSize: "0.72rem", // Font size for extra small screens (xs)
-            // },
-            // "@media (max-width:300px)": {
-            //   width: "100%", // Adjust width for extra small screens
-            //   // fontSize: "0.72rem", // Font size for extra small screens (xs)
-            // },
-            // "@media (max-width:350px)": {
-            //   width: "100%", // Adjust width for extra small screens
-            //   // fontSize: "0.72rem", // Font size for extra small screens (xs)
-            // },
-            // "@media (max-width:285px)": {
-            //   width: "100%", // Adjust width for extra small screens
-
-            //   padding: 0,
-
-            //   // fontSize: "0.72rem", // Font size for extra small screens (xs)
-            // },
           }}
         >
           <Typography
@@ -255,7 +225,6 @@ const MyQuiz = ({
                       <Switch
                         sx={{
                           fontSize: { xs: "0.72rem", sm: "0.875rem" },
-                          // padding: { xs: "2px" },
                         }}
                         checked={todo.completed}
                         onChange={() => handleToggleCompleted(todo.id)}
@@ -389,7 +358,6 @@ const MyQuiz = ({
       ) : (
         <Modal
           open={editFormVisibility}
-          // onClose={cancelUpdate}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
           sx={{
@@ -489,28 +457,7 @@ const MyQuiz = ({
                                 e.target.value
                               )
                             }
-                            // sx={{ mb: 2 }}
                           />
-                          <Button>delete</Button>
-                          {/* <input
-                          type="radio"
-                          checked={option.checked}
-                          onChange={() =>
-                            handleCheckboxChangeE(index, answerIndex)
-                          }
-                        /> */}
-                          {/* <IconButton
-                            onClick={() =>
-                              handleCheckboxChangeE(index, answerIndex)
-                            }
-                          >
-                            {option.checked ? (
-                              <CheckCircleIcon sx={{ color: "#008DDA" }} />
-                            ) : (
-                              <RadioButtonUncheckedIcon />
-                            )}
-                          </IconButton> */}
-                          {/* <label>Correct Answer</label> */}
                         </Box>
                       ))}
                       <Button
@@ -541,11 +488,7 @@ const MyQuiz = ({
                     UPDATE
                   </Button>
                   <br />
-                  {/* <Button variant="outlined" onClick={cancelUpdate}>
-                    <CloseIcon />
-                  </Button> */}
                 </Box>
-                {/* </form> */}
               </FormGroup>
             </FormControl>
           </Box>

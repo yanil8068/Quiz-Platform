@@ -62,18 +62,12 @@ const PlayQuiz = ({
   return (
     <Box
       sx={{
-        // border: "2px solid grey",
-        // borderRadius: "8px",
         minHeight: "85vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        //position: "absolute",
-        // top: "50%",
-        // left: "50%",
-        // transform: "translate(-50%, -50%)",
-        // width: { xs: "92%", md: "70%", lg: "60%" }, // Adjust width for different screen sizes
+
         bgcolor: "background.paper",
         p: 2,
         overflowY: "auto", // Enable vertical scrolling if needed
@@ -91,7 +85,6 @@ const PlayQuiz = ({
         },
       }}
     >
-      {/* {currQues < questionsplay.length ? ( */}
       <Box sx={{ width: { xs: "92%", md: "75%", lg: "50%" } }}>
         {questionsplay[currQues] ? (
           <Box>
@@ -126,14 +119,13 @@ const PlayQuiz = ({
                 color={optionColors[index]} // Set button color based on optionColors state
                 onClick={() => handleOptionClick(index, option.checked)}
                 fullWidth
-                // disabled={answerSelected} // Disable the button if an answer has been selected
               >
                 <Box sx={{ liststyleType: "none" }} key={index}>
                   {optionsLetters[index]}.{option.answer}
                 </Box>
               </Button>
             ))}
-            {/* </ul> */}
+
             <Box
               sx={{
                 display: "flex",
@@ -162,11 +154,6 @@ const PlayQuiz = ({
           </Typography>
         )}
       </Box>
-      {/* ) : (
-        <Typography variant="h8" gutterBottom>
-          <Result score={score} TotalQuestion={questionsplay.length} />
-        </Typography>
-      )} */}
     </Box>
   );
 };

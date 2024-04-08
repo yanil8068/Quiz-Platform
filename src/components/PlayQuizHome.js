@@ -12,7 +12,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-// import { useDispatch } from 'react-redux';
 const styleforresponsive = {
   width: { xs: "5ch", sm: "10ch" },
   fontSize: { xs: "0.72rem", sm: "0.875rem", lg: "1.1rem" },
@@ -28,7 +27,6 @@ const PlayQuizHome = ({
   setQuestionsplay,
   setTitle,
 }) => {
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const quiz = useSelector((state) => state.operationsReducer);
   console.log("quiz", quiz);
@@ -39,10 +37,6 @@ const PlayQuizHome = ({
   // Initialize state variable to store the selected value
   // Create an array to store all the questions
 
-  // const [editTodoplay, setEditTodoplay] = useState('');
-  // const [questionsplay, setQuestionsplay] = useState([]);
-  // console.log(editTodoplay,questionsplay)
-
   const handleEditClickplay = (todo, event) => {
     if (isNameValid) {
       setTitle(todo.todo);
@@ -52,11 +46,6 @@ const PlayQuizHome = ({
     } else {
       alert("Please input a correct name.");
     }
-
-    // event.preventDefault(); // Prevent default form submission
-    // setEditTodoplay(todo);
-    // setQuestionsplay(todo.questions);
-    // navigate("/Quiz");
   };
   ////
   const [isNameValid, setIsNameValid] = useState(false);
@@ -84,15 +73,10 @@ const PlayQuizHome = ({
         minHeight: "90vh",
         flexDirection: "column",
 
-        //mt: 2,
-        // position: "absolute",
         boxShadow: 24,
-        // top: "50%",
-        // left: "50%",
-        // transform: "translateX(-50%)",
-        // width: { xs: "92%", md: "75%", lg: "100%" }, // Adjust width for different screen sizes
+
         bgcolor: "background.paper",
-        // bgcolor: "#D862BC",
+
         p: 4,
         overflowY: "auto", // Enable vertical scrolling if needed
         fontSize: "1rem", // Default font size
@@ -131,18 +115,7 @@ const PlayQuizHome = ({
         }}
         component={Paper}
       >
-        <Table
-          // sx={{
-          //   display: "flex",
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          //   flexDirection: "column",
-          //   alignContent: "center",
-          //   minWidth: 300,
-          //   width: { xs: "92%", md: "75%", lg: "50%" },
-          // }}
-          aria-label="simple table"
-        >
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell sx={styleforresponsive} align="center">
@@ -157,7 +130,6 @@ const PlayQuizHome = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {completedQuizzes.map((todo, index) => ( */}
             {existingCompletedQuizzes.map((todo, index) => (
               <TableRow
                 key={todo.id}

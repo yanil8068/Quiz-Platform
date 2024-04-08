@@ -1,24 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardMedia,
-  // Backdrop,
-  // Modal,
-  // Fade,
-  // Radio,
-  // RadioGroup,
-  // FormControlLabel,
-  // FormControl,
-  // FormLabel,
-} from "@mui/material";
+import { Box, Card, CardActionArea, CardMedia } from "@mui/material";
 import newQuizImg from "../assets/createquiz.png";
 import myQuizzesImg from "../assets/myquizzes.png";
 import playquiz from "../assets/PlayQuiz.png";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase/config";
 
 const Home = () => {
   useEffect(() => {
@@ -187,92 +172,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// import React, { useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import { Grid, Card, CardActionArea, CardMedia } from "@mui/material";
-// import newQuizImg from "../assets/createquiz.png";
-// import myQuizzesImg from "../assets/myquizzes.png";
-// import playquiz from "../assets/PlayQuiz.png";
-
-// const Home = () => {
-//   useEffect(() => {
-//     const existingQuizData = localStorage.getItem("quizzes");
-//     if (!existingQuizData) {
-//       const defaultQuizData = [
-//         {
-//           id: 1,
-//           todo: "Buy Laptop",
-//           completed: true,
-//           description: "Need to buy a new laptop for work.",
-//           creattime: "1/4/2024 3:35: PM",
-//           questions: [
-//             {
-//               question: "Which brand are you considering?",
-//               answerOptions: [
-//                 { answer: "Brand A", checked: true },
-//                 { answer: "Brand B", checked: false },
-//                 { answer: "Brand C", checked: false },
-//               ],
-//             },
-//             // Add more questions if needed
-//           ],
-//         },
-//         // Add more quizzes if needed
-//       ];
-//       localStorage.setItem("quizzes", JSON.stringify(defaultQuizData));
-//     }
-//   }, []);
-
-//   return (
-//     <Grid
-//       container
-//       spacing={3}
-//       direction={{ xs: "column", md: "row" }}
-//       alignItems="center"
-//       justifyContent="center"
-//       style={{ minHeight: "100vh", padding: "1vh" }}
-//     >
-//       <Grid item xs={12} md={4}>
-//         <Card sx={{ width: "100%", overflow: "visible" }}>
-//           <CardActionArea component={Link} to="/new">
-//             <CardMedia
-//               component="img"
-//               image={newQuizImg}
-//               alt="New Quiz"
-//               sx={{ width: "100%", objectFit: "cover" }}
-//             />
-//           </CardActionArea>
-//         </Card>
-//       </Grid>
-
-//       <Grid item xs={12} md={4}>
-//         <Card sx={{ width: "100%", overflow: "visible" }}>
-//           <CardActionArea component={Link} to="/quizzes">
-//             <CardMedia
-//               component="img"
-//               image={myQuizzesImg}
-//               alt="My Quizzes"
-//               sx={{ width: "100%", objectFit: "cover" }}
-//             />
-//           </CardActionArea>
-//         </Card>
-//       </Grid>
-
-//       <Grid item xs={12} md={4}>
-//         <Card sx={{ width: "100%", overflow: "visible" }}>
-//           <CardActionArea component={Link} to="/PlayQuizHome">
-//             <CardMedia
-//               component="img"
-//               image={playquiz}
-//               alt="My Quizzes"
-//               sx={{ width: "100%", objectFit: "cover" }}
-//             />
-//           </CardActionArea>
-//         </Card>
-//       </Grid>
-//     </Grid>
-//   );
-// };
-
-// export default Home;

@@ -161,7 +161,7 @@ function LoginPage() {
                   </Box>
                 ) : (
                   <Box sx={{ m: 1 }} fullWidth>
-                    Sign Up Form :
+                    Sign-Up Form :
                   </Box>
                 )}
                 <TextField

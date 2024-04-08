@@ -151,7 +151,7 @@ const MyQuiz = ({
         <Box
           sx={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: { sm: "flex-start", md: "center" },
             alignItems: "center",
             minHeight: "85vh",
             flexDirection: "column",

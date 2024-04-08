@@ -322,8 +322,8 @@ const CreateQuiz = ({ editFormVisibility }) => {
           <FormGroup
             sx={{
               p: 2,
-              border: "2px solid #000",
-              width: { xs: "92%", md: "75%", lg: "50%" },
+              // border: "2px solid #000",
+              width: { xs: "80%", md: "75%", lg: "50%" },
             }}
           >
             <TextField

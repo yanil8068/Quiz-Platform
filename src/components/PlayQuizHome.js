@@ -68,7 +68,7 @@ const PlayQuizHome = ({
       onSubmit={(event) => event.preventDefault()} // Prevent form submission on Enter key press
       sx={{
         display: "flex",
-        justifyContent: "center",
+        justifyContent: { sm: "flex-start", md: "center" },
         alignItems: "center",
         minHeight: "90vh",
         flexDirection: "column",

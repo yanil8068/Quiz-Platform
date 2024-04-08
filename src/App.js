@@ -23,7 +23,7 @@ function App() {
     useState(false);
 
   const user = useSelector((state) => state.usersReducer);
-  console.log(user.currentUser);
+  console.log("current", user.currentUser);
   console.log(`checking ${user}`);
   // const Navigate = useNavigate();
   // Create an array to store all the questions

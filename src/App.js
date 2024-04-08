@@ -23,8 +23,11 @@ function App() {
     useState(false);
 
   const user = useSelector((state) => state.usersReducer);
-  console.log("curr", user.currentUser);
+  console.log("current", user.currentUser);
   console.log(`checking ${user}`);
+
+  // Save currentUser to localStorage when it changes
+
   // const Navigate = useNavigate();
   // Create an array to store all the questions
   const allQuestions = questions.map((question) => {
@@ -196,7 +199,7 @@ function App() {
           <Header />
           <Routes>
             {/* <Route path="/" element={<Home />} /> */}
-            <Route path="/" index element={<Home />} />
+            <Route path="/" element={<Home />} />
 
             {/* <Route path="/login" element={<LoginPage />} /> */}
 
@@ -275,7 +278,11 @@ function App() {
           </Routes>
         </BrowserRouter>
       ) : (
-        <LoginPage />
+        <BrowserRouter>
+          <Routes>
+            <Route path="*" element={<LoginPage />} />
+          </Routes>
+        </BrowserRouter>
       )}
     </>
   );

@@ -23,7 +23,7 @@ function App() {
     useState(false);
 
   const user = useSelector((state) => state.usersReducer);
-  console.log("current", user.currentUser);
+  console.log("curr", user.currentUser);
   console.log(`checking ${user}`);
   // const Navigate = useNavigate();
   // Create an array to store all the questions
@@ -191,90 +191,96 @@ function App() {
 
   return (
     <>
-      {/* {user.currentUser ? ( */}
       <BrowserRouter>
-        <Header />
-        <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" index element={<Home />} />
+        {user.currentUser ? (
+          <>
+            <Header />
+            <Routes>
+              {/* <Route path="/" element={<Home />} /> */}
+              <Route path="/" index element={<Home />} />
 
-          {/* <Route path="/login" element={<LoginPage />} /> */}
+              {/* <Route path="/login" element={<LoginPage />} /> */}
 
-          <Route
-            path="/new"
-            element={<CreateQuiz editFormVisibility={editFormVisibility} />}
-          />
-          <Route
-            path="/quizzes"
-            element={
-              <MyQuiz
-                handleDeleteQuestion={handleDeleteQuestion}
-                handleEditClick={handleEditClick}
-                editFormVisibility={editFormVisibility}
-                setEditFormVisibility={setEditFormVisibility}
-                cancelUpdate={cancelUpdate}
-                editSubmit={editSubmit}
-                editValue={editValue}
-                setEditValue={setEditValue}
-                editDes={editDes}
-                setEditDes={setEditDes}
-                questions={questions}
-                setQuestions={setQuestions}
-                handleAddAnswerOptionE={handleAddAnswerOptionE}
-                handleQuestionChangeE={handleQuestionChangeE}
-                handleAnswerOptionChangeE={handleAnswerOptionChangeE}
-                // handleCheckboxChangeE={handleCheckboxChangeE}
-                switchvalue={switchvalue}
-                setswitchvalue={setswitchvalue}
-                editError={editError}
-                atLeastOneCorrectAnswerEdit={atLeastOneCorrectAnswerEdit}
-                setAtLeastOneCorrectAnswerEdit={setAtLeastOneCorrectAnswerEdit}
+              <Route
+                path="/new"
+                element={<CreateQuiz editFormVisibility={editFormVisibility} />}
               />
-            }
-          />
-          <Route
-            path="/PlayQuizHome"
-            element={
-              <PlayQuizHome
-                name={name}
-                setName={setName}
-                editQuizplay={editQuizplay}
-                setEditQuizplay={setEditQuizplay}
-                questionsplay={questionsplay}
-                setQuestionsplay={setQuestionsplay}
-                setTitle={setTitle}
+              <Route
+                path="/quizzes"
+                element={
+                  <MyQuiz
+                    handleDeleteQuestion={handleDeleteQuestion}
+                    handleEditClick={handleEditClick}
+                    editFormVisibility={editFormVisibility}
+                    setEditFormVisibility={setEditFormVisibility}
+                    cancelUpdate={cancelUpdate}
+                    editSubmit={editSubmit}
+                    editValue={editValue}
+                    setEditValue={setEditValue}
+                    editDes={editDes}
+                    setEditDes={setEditDes}
+                    questions={questions}
+                    setQuestions={setQuestions}
+                    handleAddAnswerOptionE={handleAddAnswerOptionE}
+                    handleQuestionChangeE={handleQuestionChangeE}
+                    handleAnswerOptionChangeE={handleAnswerOptionChangeE}
+                    // handleCheckboxChangeE={handleCheckboxChangeE}
+                    switchvalue={switchvalue}
+                    setswitchvalue={setswitchvalue}
+                    editError={editError}
+                    atLeastOneCorrectAnswerEdit={atLeastOneCorrectAnswerEdit}
+                    setAtLeastOneCorrectAnswerEdit={
+                      setAtLeastOneCorrectAnswerEdit
+                    }
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/Quiz"
-            element={
-              <PlayQuiz
-                name={name}
-                score={score}
-                setScore={setScore}
-                questionsplay={questionsplay}
-                setQuestionsplay={setQuestionsplay}
-                title={title}
+              <Route
+                path="/PlayQuizHome"
+                element={
+                  <PlayQuizHome
+                    name={name}
+                    setName={setName}
+                    editQuizplay={editQuizplay}
+                    setEditQuizplay={setEditQuizplay}
+                    questionsplay={questionsplay}
+                    setQuestionsplay={setQuestionsplay}
+                    setTitle={setTitle}
+                  />
+                }
               />
-            }
-          />
-          {/* <Route path="/quiz/:id" element={Quiz} />*/}
-          <Route
-            path="/result"
-            element={
-              <Result
-                score={score}
-                TotalQuestion={questionsplay.length}
-                setName={setName}
+              <Route
+                path="/Quiz"
+                element={
+                  <PlayQuiz
+                    name={name}
+                    score={score}
+                    setScore={setScore}
+                    questionsplay={questionsplay}
+                    setQuestionsplay={setQuestionsplay}
+                    title={title}
+                  />
+                }
               />
-            }
-          />
-        </Routes>
+              {/* <Route path="/quiz/:id" element={Quiz} />*/}
+              <Route
+                path="/result"
+                element={
+                  <Result
+                    score={score}
+                    TotalQuestion={questionsplay.length}
+                    setName={setName}
+                  />
+                }
+              />
+            </Routes>
+          </>
+        ) : (
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
+          </Routes>
+        )}
       </BrowserRouter>
-      {/* ) : ( */}
-      <LoginPage />
-      {/* )} */}
     </>
   );
 }

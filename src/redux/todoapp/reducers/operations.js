@@ -146,7 +146,7 @@ export const operationsReducer = (state = initialState, action) => {
       return filteredQuizs;
     //editing and updating quiz
     case UPDATE_QUIZ:
-      console.log(action.payload);
+      //   console.log(action.payload);
       return state.map((quiz) =>
         quiz.id === action.payload.id ? action.payload : quiz
       );

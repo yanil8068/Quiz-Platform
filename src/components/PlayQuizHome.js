@@ -36,10 +36,10 @@ const PlayQuizHome = ({
 }) => {
   const navigate = useNavigate();
   const quiz = useSelector((state) => state.operationsReducer);
-  console.log("quiz", quiz);
+  //console.log("quiz", quiz);
   // Filter the quizzes where completed is true
   const completedQuizzes = quiz.filter((todo) => todo.completed);
-  console.log("completedQuizzes", completedQuizzes[0].todo);
+  // console.log("completedQuizzes", completedQuizzes[0].todo);
   // console.log(quiz)
   // Initialize state variable to store the selected value
   // Create an array to store all the questions

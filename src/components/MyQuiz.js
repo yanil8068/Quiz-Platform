@@ -180,7 +180,7 @@ const MyQuiz = ({
   };
 
   const todos = useSelector((state) => state.operationsReducer);
-  console.log(todos);
+  //console.log(todos);
 
   ///for modal of delete
   const [open, setOpen] = React.useState(false);

@@ -116,6 +116,7 @@ const PlayQuiz = ({
 
             {questionsplay[currQues].answerOptions.map((option, index) => (
               <Button
+                key={index}
                 variant={optionVariant[index]}
                 sx={{
                   mt: 2,

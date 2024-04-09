@@ -103,7 +103,7 @@ const Header = () => {
       })
       .catch((error) => {
         // An error happened.
-        console.log(error);
+        //console.log(error);
       });
   };
 

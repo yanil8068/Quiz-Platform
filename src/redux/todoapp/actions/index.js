@@ -61,7 +61,7 @@ export const toggleQuizCompleted = (id) => {
 
 //making currentUser to null when logout
 export const setUser = (user) => {
-  console.log("set user action is acalled");
+  //  console.log("set user action is acalled");
   return (dispatch) => {
     dispatch({
       type: SET_USER,

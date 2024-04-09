@@ -180,7 +180,7 @@ const CreateQuiz = ({ editFormVisibility }) => {
       };
     });
 
-    console.log("allquestions", allQuestions);
+    //console.log("allquestions", allQuestions);
     let todoObj = {
       id: time,
       todo: quizValue,
@@ -204,7 +204,7 @@ const CreateQuiz = ({ editFormVisibility }) => {
     handleClosee(); // Close the modal after submitting
     handleOpen();
   };
-  console.log(atLeastOneCorrectAnswer);
+  //console.log(atLeastOneCorrectAnswer);
   //console.log("answeroptionsinput", answerOptionInputs); on load of page answerOptionInputs is empty then when we write anything in it , it gets that value and when we click on add answer options it again become empty with an empty string.
   //on click of Add question
   const handleAddQuestion = () => {
@@ -284,7 +284,7 @@ const CreateQuiz = ({ editFormVisibility }) => {
     handleClose();
     navigate("/");
   };
-  console.log(atLeastOneCorrectAnswer);
+  //console.log(atLeastOneCorrectAnswer);
   return (
     <Box>
       {/* modal opens up to choose type of question */}

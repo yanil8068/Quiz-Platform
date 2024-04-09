@@ -139,9 +139,14 @@ const Home = () => {
         sx={{
           width: { xs: "90%", md: "45%" },
           overflow: "visible",
+          borderRadius: "25px",
         }}
       >
-        <CardActionArea component={Link} to="/new">
+        <CardActionArea
+          sx={{ borderRadius: "25px" }}
+          component={Link}
+          to="/new"
+        >
           <CardMedia
             component="img"
             image={newQuizImg}
@@ -157,8 +162,18 @@ const Home = () => {
       </Card>
 
       {/* card for My quizzes */}
-      <Card sx={{ width: { xs: "90%", md: "45%" }, overflow: "visible" }}>
-        <CardActionArea component={Link} to="/quizzes">
+      <Card
+        sx={{
+          width: { xs: "90%", md: "45%" },
+          overflow: "visible",
+          borderRadius: "25px",
+        }}
+      >
+        <CardActionArea
+          sx={{ borderRadius: "25px" }}
+          component={Link}
+          to="/quizzes"
+        >
           <CardMedia
             component="img"
             image={myQuizzesImg}
@@ -174,8 +189,18 @@ const Home = () => {
       </Card>
 
       {/* card for Play quiz */}
-      <Card sx={{ width: { xs: "90%", md: "45%" }, overflow: "visible" }}>
-        <CardActionArea component={Link} to="/PlayQuizHome">
+      <Card
+        sx={{
+          width: { xs: "90%", md: "45%" },
+          overflow: "visible",
+          borderRadius: "25px",
+        }}
+      >
+        <CardActionArea
+          sx={{ borderRadius: "25px" }}
+          component={Link}
+          to="/PlayQuizHome"
+        >
           <CardMedia
             component="img"
             image={playquiz}

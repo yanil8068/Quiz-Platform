@@ -135,13 +135,23 @@ const Home = () => {
       }}
     >
       {/* card for create quiz */}
-      <Card sx={{ width: { xs: "90%", md: "45%" }, overflow: "visible" }}>
+      <Card
+        sx={{
+          width: { xs: "90%", md: "45%" },
+          overflow: "visible",
+        }}
+      >
         <CardActionArea component={Link} to="/new">
           <CardMedia
             component="img"
             image={newQuizImg}
             alt="New Quiz"
-            sx={{ width: "100%", objectFit: "cover" }}
+            sx={{
+              width: "100%",
+              objectFit: "cover",
+              borderRadius: "25px",
+              " :hover": { sm: { opacity: 1 }, md: { opacity: 0.7 } },
+            }}
           />
         </CardActionArea>
       </Card>
@@ -153,7 +163,12 @@ const Home = () => {
             component="img"
             image={myQuizzesImg}
             alt="My Quizzes"
-            sx={{ width: "100%", objectFit: "cover" }}
+            sx={{
+              width: "100%",
+              objectFit: "cover",
+              borderRadius: "25px",
+              " :hover": { sm: { opacity: 1 }, md: { opacity: 0.7 } },
+            }}
           />
         </CardActionArea>
       </Card>
@@ -165,7 +180,12 @@ const Home = () => {
             component="img"
             image={playquiz}
             alt="My Quizzes"
-            sx={{ width: "100%", objectFit: "cover" }}
+            sx={{
+              width: "100%",
+              objectFit: "cover",
+              borderRadius: "25px",
+              " :hover": { sm: { opacity: 1 }, md: { opacity: 0.7 } },
+            }}
           />
         </CardActionArea>
       </Card>

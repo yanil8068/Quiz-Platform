@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   removeTodo,
@@ -33,7 +33,32 @@ import CloseIcon from "@mui/icons-material/Close";
 const styleforresponsive = {
   width: { xs: "5ch", sm: "10" },
   fontSize: { xs: "0.72rem", sm: "0.875rem", lg: "1.1rem" },
-  padding: { xs: "2px", sm: "16px" },
+  padding: { xs: "7px", sm: "16px" },
+  textAlign: "center",
+};
+
+const styleforresponsiveThead = {
+  width: { xs: "5ch", sm: "10" },
+  fontSize: { xs: "0.72rem", sm: "0.875rem", lg: "1.1rem" },
+  padding: { xs: "7px", sm: "16px" },
+  textAlign: "center",
+  fontWeight: 700,
+};
+
+const styleforresponsiveIconEdit = {
+  width: { xs: "5ch", sm: "10" },
+  fontSize: { xs: "0.875rem", sm: "1.1rem", lg: "1.3rem" },
+  padding: { xs: "7px", sm: "16px" },
+  textAlign: "center",
+  color: "#1976d2",
+};
+
+const styleforresponsiveIconDelete = {
+  width: { xs: "5ch", sm: "10" },
+  fontSize: { xs: "0.875rem", sm: "1.1rem", lg: "1.3rem" },
+  padding: { xs: "7px", sm: "16px" },
+  textAlign: "center",
+  color: "red",
 };
 
 const MyQuiz = ({
@@ -49,7 +74,6 @@ const MyQuiz = ({
   setEditDes,
   questions,
   setQuestions,
-  handleAddAnswerOptionE,
   handleQuestionChangeE,
   handleAnswerOptionChangeE,
 
@@ -58,25 +82,31 @@ const MyQuiz = ({
   editError,
   atLeastOneCorrectAnswerEdit,
   setAtLeastOneCorrectAnswerEdit,
+  errInEdit,
+  setErrInEdit,
 }) => {
   useEffect(() => {
     setAtLeastOneCorrectAnswerEdit(true);
   }, []);
   const dispatch = useDispatch();
 
-  // // Function to delete a question and its answer options
+  //when click on delete icon on edit form for a particular question
+  //  Function to delete a question and its answer options
   const handleDeleteQuestionAndDispatch = (questionIndex, id) => {
-    // Dispatch the deleteQuestion action
+    // Dispatch the deleteQuestion action to delete from redux store
     dispatch(deleteQuestion(questionIndex));
-    // Call the handleDeleteQuestion function to delete the question locally in the component
+    // Call the handleDeleteQuestion function to delete the question locally in the component that is in Questions array
     handleDeleteQuestion(questionIndex);
   };
 
+  //when Add Question button is clicked in edit form
   const handleAddQuestion = () => {
     setAtLeastOneCorrectAnswerEdit(false);
+    //validation for selecting one correct answer
     if (!atLeastOneCorrectAnswerEdit) {
-      return alert("select atleast one correct answer");
+      return setErrInEdit("select atleast one correct answer");
     } else {
+      //adding empty question in questions array
       setQuestions([
         ...questions,
         { question: "", answerOptions: [{ answer: "", checked: false }] },
@@ -84,13 +114,26 @@ const MyQuiz = ({
     }
   };
 
+  //when we click on add answer button in edit form for a particular question
   const handleAddAnswerOption = (questionIndex) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].answerOptions.push({
-      answer: "",
-      checked: false,
-    });
-    setQuestions(updatedQuestions);
+    //validation for answer option count
+    const currentAnswerOptionsCount =
+      updatedQuestions[questionIndex].answerOptions.length;
+
+    // Check if the current number of answer options is less than 4
+    if (currentAnswerOptionsCount < 4) {
+      updatedQuestions[questionIndex].answerOptions.push({
+        //passing an object when answer as empty string and checked as false
+        answer: "",
+        checked: false,
+      });
+      //updating Questions with added value
+      setQuestions(updatedQuestions);
+    } else {
+      // Display a message to the user indicating the maximum limit is reached
+      setErrInEdit("Maximum 4 answer options are allowed.");
+    }
   };
 
   const handleToggleCompleted = (id) => {
@@ -112,6 +155,7 @@ const MyQuiz = ({
     localStorage.setItem("quizzes", JSON.stringify(updatedQuizzess));
   };
 
+  //when we click on radio in edit form, it is making the clicked radio as correct answer and all other answer options in that particular question as incorrect answer
   const handleCheckboxChangeE = (questionIndex, answerIndex) => {
     // Create a copy of the questions array
     const updatedQuestions = questions.map((question, index) => {
@@ -174,6 +218,7 @@ const MyQuiz = ({
               textAlign: "right",
               width: { xs: "100%", md: "75%", lg: "50%" },
               textDecoration: "none",
+              fontWeight: 700,
             }}
           >
             Create new Quiz
@@ -189,17 +234,17 @@ const MyQuiz = ({
             <Table sx={{ minWidth: 300 }} aria-label="simple table">
               <TableHead sx={{ borderBottom: "2px solid black" }}>
                 <TableRow>
-                  <TableCell sx={styleforresponsive}>Quiz no.</TableCell>
-                  <TableCell sx={styleforresponsive} align="right">
+                  <TableCell sx={styleforresponsiveThead}>Quiz no.</TableCell>
+                  <TableCell sx={styleforresponsiveThead} align="right">
                     Title
                   </TableCell>
-                  <TableCell sx={styleforresponsive} align="right">
+                  <TableCell sx={styleforresponsiveThead} align="right">
                     Status
                   </TableCell>
-                  <TableCell sx={styleforresponsive} align="right">
+                  <TableCell sx={styleforresponsiveThead} align="right">
                     Created on
                   </TableCell>
-                  <TableCell sx={styleforresponsive} align="right">
+                  <TableCell sx={styleforresponsiveThead} align="right">
                     Action
                   </TableCell>
                 </TableRow>
@@ -238,11 +283,11 @@ const MyQuiz = ({
                       {editFormVisibility === false && (
                         <>
                           <BorderColorIcon
-                            sx={styleforresponsive}
+                            sx={styleforresponsiveIconEdit}
                             onClick={() => handleEditClick(todo)}
                           />
                           <DeleteIcon
-                            sx={styleforresponsive}
+                            sx={styleforresponsiveIconDelete}
                             onClick={handleOpen}
                           />
                           <Modal
@@ -258,8 +303,8 @@ const MyQuiz = ({
                                 left: "50%",
                                 transform: "translate(-50%, -50%)",
                                 width: {
-                                  xs: "90%",
-                                  sm: "80%",
+                                  xs: "70%",
+                                  sm: "75%",
                                   md: "60%",
                                   lg: "50%",
                                 }, // Adjust width for different screen sizes
@@ -356,6 +401,7 @@ const MyQuiz = ({
           </TableContainer>
         </Box>
       ) : (
+        // this model opened when click on edit icon to edit that particular quiz, when editFormVisibility is true
         <Modal
           open={editFormVisibility}
           aria-labelledby="modal-modal-title"
@@ -439,6 +485,7 @@ const MyQuiz = ({
                               handleCheckboxChangeE(index, answerIndex)
                             }
                           >
+                            {/* changing the color of the radio based on wheather the option is correct or not */}
                             {option.checked ? (
                               <CheckCircleIcon sx={{ color: "#008DDA" }} />
                             ) : (
@@ -484,6 +531,9 @@ const MyQuiz = ({
                   </Button>
                   <br />
                   {editError && <Box style={{ color: "red" }}>{editError}</Box>}
+                  {!editError && errInEdit && (
+                    <Box style={{ color: "red" }}>{errInEdit}</Box>
+                  )}
                   <Button sx={{ mb: 2 }} variant="contained" type="submit">
                     UPDATE
                   </Button>
@@ -499,3 +549,5 @@ const MyQuiz = ({
 };
 
 export default MyQuiz;
+
+// edit =>handleEditClick=> editform =>{setEditValue,setEditDes,handleQuestionChangeE,handleCheckboxChangeE,handleAnswerOptionChangeE,handleAddAnswerOption, handleDeleteQuestionAndDispatch , handleAddQuestion   }  => update =>editSubmit=> delete=> setOpen(formodal)=> dispatchonclick

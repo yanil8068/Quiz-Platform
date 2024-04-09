@@ -70,10 +70,7 @@ const CreateQuiz = ({ editFormVisibility }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // validation for correct answer selected
-    if (!atLeastOneCorrectAnswer) {
-      return alert("select atleast one correct answer");
-    }
+
     //to create data and time of creation
     let date = new Date();
     let time = date.getTime();
@@ -117,6 +114,12 @@ const CreateQuiz = ({ editFormVisibility }) => {
       setTitleError(""); // Clear error message if description is valid
     }
 
+    // Check if there are any questions added
+    if (questions.length === 0) {
+      setTitleError("Please add at least one question.");
+      return;
+    }
+
     // Validation logic for questions
     const questionLengthValid = questions.every(
       (question) =>
@@ -146,6 +149,11 @@ const CreateQuiz = ({ editFormVisibility }) => {
     if (!answerOptionsNotEmpty) {
       setTitleError("Answer options cannot be empty.");
       return; // Stop execution if any answer option is empty
+    }
+
+    // validation for correct answer selected
+    if (!atLeastOneCorrectAnswer) {
+      return setTitleError("select atleast one correct answer");
     }
 
     //For each question in the questions array, a new object representing the question is created.
@@ -203,7 +211,7 @@ const CreateQuiz = ({ editFormVisibility }) => {
     //to make the add question button disable and get enable only when we select one correct answer
     setAtLeastOneCorrectAnswer(false);
     if (!atLeastOneCorrectAnswer) {
-      return alert("select atleast one correct answer");
+      return setTitleError("select atleast one correct answer");
     } else {
       // a new question object is added to the questions array.  spreading the existing questions array and appending the new question object.
       setQuestions([...questions, { question: "", answerOptions: [] }]);
@@ -220,6 +228,15 @@ const CreateQuiz = ({ editFormVisibility }) => {
   };
 
   const handleAddAnswerOption = (questionIndex) => {
+    // Check if the number of answer options is less than 4
+    if (questions[questionIndex].answerOptions.length >= 4) {
+      // If there are already 4 answer options, display an error message or take appropriate action
+      // For example, you can set an error state and display it to the user
+      // This depends on how you want to handle the situation
+      // For now, let's just return from the function
+      return setTitleError("maximum four answer options can be added");
+    }
+
     // a copy of the current questions array is created using the spread operator ([...]).
     const updatedQuestions = [...questions];
     //Then, a copy of the answer options array for the specified question is created.
@@ -310,7 +327,7 @@ const CreateQuiz = ({ editFormVisibility }) => {
         <FormControl
           sx={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: { sm: "flex-start", md: "center" },
             alignItems: "center",
             flexDirection: "column",
             margin: "20px auto",

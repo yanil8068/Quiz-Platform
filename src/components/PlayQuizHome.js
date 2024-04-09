@@ -18,6 +18,13 @@ const styleforresponsive = {
   padding: { xs: "2px", sm: "16px" },
 };
 
+const styleforresponsiveThead = {
+  width: { xs: "5ch", sm: "10ch" },
+  fontSize: { xs: "0.72rem", sm: "0.875rem", lg: "1.1rem" },
+  padding: { xs: "2px", sm: "16px" },
+  fontWeight: "700",
+};
+
 const PlayQuizHome = ({
   name,
   setName,
@@ -36,7 +43,10 @@ const PlayQuizHome = ({
   // console.log(quiz)
   // Initialize state variable to store the selected value
   // Create an array to store all the questions
+  const [isNameValid, setIsNameValid] = useState(false);
+  const [nameError, setNameError] = useState("");
 
+  //when click on Start quiz
   const handleEditClickplay = (todo, event) => {
     if (isNameValid) {
       setTitle(todo.todo);
@@ -44,15 +54,16 @@ const PlayQuizHome = ({
       setQuestionsplay(todo.questions);
       navigate("/Quiz");
     } else {
-      alert("Please input a correct name.");
+      setNameError("Please input a correct name.");
     }
   };
-  ////
-  const [isNameValid, setIsNameValid] = useState(false);
 
+  //for textfield of Name
   const handleNameChange = (e) => {
     const newName = e.target.value;
+    //setting new name value
     setName(newName);
+    //Validation for name
     setIsNameValid(newName.length >= 5 && newName.length <= 50);
   };
   ////4.to get data from local storage and show here so it also do not get vanished when refreshed
@@ -100,9 +111,12 @@ const PlayQuizHome = ({
         label="Name"
         variant="outlined"
         onChange={handleNameChange}
-        sx={{ mb: 2, width: { xs: "92%", md: "75%", lg: "50%" } }}
+        sx={{
+          mb: 2,
+          width: { xs: "92%", md: "75%", lg: "50%" },
+        }}
       />
-
+      {nameError ? <Box sx={{ color: "red" }}>{nameError}</Box> : ""}
       <TableContainer
         sx={{
           display: "flex",
@@ -115,21 +129,22 @@ const PlayQuizHome = ({
         }}
         component={Paper}
       >
-        <Table aria-label="simple table">
-          <TableHead>
+        <Table aria-label="simple table" sx={{ border: "2px solid black" }}>
+          <TableHead sx={{ border: "2px solid black" }}>
             <TableRow>
-              <TableCell sx={styleforresponsive} align="center">
+              <TableCell sx={styleforresponsiveThead} align="center">
                 Quiz no.
               </TableCell>
-              <TableCell sx={styleforresponsive} align="center">
+              <TableCell sx={styleforresponsiveThead} align="center">
                 Title
               </TableCell>
-              <TableCell sx={styleforresponsive} align="center">
+              <TableCell sx={styleforresponsiveThead} align="center">
                 Action
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
+            {/* mapping on quiz that is stored in local storage */}
             {existingCompletedQuizzes.map((todo, index) => (
               <TableRow
                 key={todo.id}
@@ -143,6 +158,10 @@ const PlayQuizHome = ({
                 </TableCell>
                 <TableCell sx={styleforresponsive} align="center">
                   <Button
+                    sx={{
+                      textTransform: "none",
+                      padding: { sm: "1px", md: "16px" },
+                    }}
                     variant="contained"
                     onClick={(event) => handleEditClickplay(todo, event)}
                   >
@@ -159,3 +178,5 @@ const PlayQuizHome = ({
 };
 
 export default PlayQuizHome;
+
+// name=> handleNameChange => startquiz => handleEditClickplay => navigate to PlayQuiz i.e. /Quiz

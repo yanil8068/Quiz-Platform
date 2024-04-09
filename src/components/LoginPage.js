@@ -130,12 +130,20 @@ function LoginPage() {
 
             <Box sx={{ textAlign: "center" }} className="login-type">
               <Button
+                sx={{
+                  color: "black",
+                  // ":hover": {
+                  //   transform: "scale(1.2)",
+                  //   transition: "transform 0.2s",
+                  // },
+                }}
                 className={`btn ${loginType == "login" ? "selected" : ""}`}
                 onClick={() => setLoginType("login")}
               >
                 Login
               </Button>
               <Button
+                sx={{ color: "black", ml: 2 }}
                 className={`btn ${loginType == "signup" ? "selected" : ""}`}
                 onClick={() => setLoginType("signup")}
               >
@@ -191,6 +199,7 @@ function LoginPage() {
               </Box>
               {loginType == "login" ? (
                 <Button
+                  variant="contained"
                   onClick={(e) => {
                     handleLogin(e);
                   }}
@@ -199,6 +208,7 @@ function LoginPage() {
                 </Button>
               ) : (
                 <Button
+                  variant="contained"
                   onClick={(e) => {
                     handleSignup(e);
                   }}
@@ -209,10 +219,11 @@ function LoginPage() {
               {error && <Box className="error">{error}</Box>}
 
               <Typography
+                sx={{ m: 1 }}
                 onClick={(e) => {
                   handlePasswordReset(e);
                 }}
-                variant="h6"
+                variant="h7"
                 gutterBottom
               >
                 Forgot Password?

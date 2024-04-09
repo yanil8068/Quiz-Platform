@@ -1,3 +1,4 @@
+//all constants at one place
 export const ADD_QUIZ = "ADD_QUIZ";
 export const REMOVE_QUIZ = "REMOVE_QUIZ";
 export const UPDATE_QUIZ = "UPDATE_QUIZ";
@@ -5,6 +6,8 @@ export const DELETE_QUESTION = "DELETE_QUESTION";
 export const TOGGLE_QUIZ_COMPLETED = "TOGGLE_QUIZ_COMPLETED";
 export const SET_USER = "SET_USER";
 
+//actions:
+//creating new quiz
 export const addQuiz = (payload) => {
   return (dispatch) => {
     // Perform any asynchronous operations here (e.g., API calls)
@@ -16,6 +19,7 @@ export const addQuiz = (payload) => {
   };
 };
 
+//deleting a particular quiz
 export const removeTodo = (payload) => {
   return (dispatch) => {
     dispatch({
@@ -25,6 +29,7 @@ export const removeTodo = (payload) => {
   };
 };
 
+//editing and updating quiz
 export const handleEditSubmit = (payload) => {
   return (dispatch) => {
     dispatch({
@@ -34,6 +39,7 @@ export const handleEditSubmit = (payload) => {
   };
 };
 
+//delete a particular question from questions array in edit form
 export const deleteQuestion = (questionIndex) => {
   return (dispatch) => {
     dispatch({
@@ -43,6 +49,7 @@ export const deleteQuestion = (questionIndex) => {
   };
 };
 
+//make quiz active or inactive
 export const toggleQuizCompleted = (id) => {
   return (dispatch) => {
     dispatch({
@@ -52,6 +59,7 @@ export const toggleQuizCompleted = (id) => {
   };
 };
 
+//making currentUser to null when logout
 export const setUser = (user) => {
   console.log("set user action is acalled");
   return (dispatch) => {

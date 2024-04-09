@@ -14,21 +14,26 @@ import { useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
-  const [editFormVisibility, setEditFormVisibility] = useState(false);
-  const [editQuiz, setEditQuiz] = useState("");
-  const [questions, setQuestions] = useState([]);
-  const [name, setName] = useState("");
-  const [score, setScore] = useState(0);
+  const [editFormVisibility, setEditFormVisibility] = useState(false); // state to make form visible or hide
+  const [editQuiz, setEditQuiz] = useState(""); //state to editQuiz
+  const [questions, setQuestions] = useState([]); //state for questions array
+  const [name, setName] = useState(""); //state for name when we play quiz
+  const [score, setScore] = useState(0); // state to keep track of score when we play quiz
   const [atLeastOneCorrectAnswerEdit, setAtLeastOneCorrectAnswerEdit] =
-    useState(false);
+    useState(false); //to track if correct answer is selected or not
+  const [errInEdit, setErrInEdit] = useState(false); //error in edit form for not adding more than 4 answer options
+  const [editError, setEditError] = React.useState(""); //error in edit form
+  const [editValue, setEditValue] = useState(""); // title in edit form
+  const [editDes, setEditDes] = useState(""); // description in edit form
+  const [switchvalue, setswitchvalue] = useState(true); // to make quiz active or inactive
+  const [editQuizplay, setEditQuizplay] = useState(""); // to hold particular quiz in playQuizHome
+  const [questionsplay, setQuestionsplay] = useState([]); // questions array for playquizhome
+  const [title, setTitle] = useState(""); //title of quiz
+  const user = useSelector((state) => state.usersReducer); // getting user
+  //console.log(editQuizplay, questionsplay);
+  // console.log("current", user.currentUser);
+  // console.log(`checking ${user}`);
 
-  const user = useSelector((state) => state.usersReducer);
-  console.log("current", user.currentUser);
-  console.log(`checking ${user}`);
-
-  // Save currentUser to localStorage when it changes
-
-  // const Navigate = useNavigate();
   // Create an array to store all the questions
   const allQuestions = questions.map((question) => {
     //questions = [[answerOptions],[answerOptions],[answerOptions]]
@@ -44,28 +49,41 @@ function App() {
       answerOptions: answerOptions,
     };
   });
+
+  //when we click on edit in MyQuiz
+  const handleEditClick = (todo) => {
+    //empty the previous errInEdit
+    setErrInEdit("");
+    //to open the edit form
+    setEditFormVisibility(true);
+    //setting particular quiz as EditQuiz
+    setEditQuiz(todo);
+    //setting questions of particular quiz
+    setQuestions(todo.questions);
+  };
+
+  //called when we delete a question in edit form
   const handleDeleteQuestion = (questionIndex) => {
     setQuestions((prevQuestions) =>
       prevQuestions.filter((_, index) => index !== questionIndex)
     );
   };
-
-  const handleEditClick = (todo) => {
-    setEditFormVisibility(true);
-    setEditQuiz(todo);
-    setQuestions(todo.questions);
-  };
-
+  // when click on x in edit form
   const cancelUpdate = () => {
+    //empty the previous errors
+    setErrInEdit("");
+    setEditError("");
+
     setEditFormVisibility(false);
   };
-  const [editError, setEditError] = React.useState(""); // State for title validation error message
 
+  //when update is clicked in edit form
   const editSubmit = (e) => {
     e.preventDefault();
-    ////Validation for correct option
+    setEditError("");
+    //Validation for correct option
     if (!atLeastOneCorrectAnswerEdit) {
-      return alert("select atleast one correct answer");
+      return setEditError("select atleast one correct answer");
     }
 
     // Validation logic for title
@@ -110,22 +128,22 @@ function App() {
     // Reset edit error state if validation passes
     setEditError("");
 
+    //setting updated questions
     setQuestions(editQuiz.questions);
+
     let editedObj = {
+      //id will be same
       id: editQuiz.id,
       todo: editValue,
       description: editDes,
       questions: allQuestions,
       completed: switchvalue,
       creattime: editQuiz.creattime,
-      // questions: allQuestions, // Add all the questions and answer options to the todoObj
     };
+    //updating question in redux store
     dispatch(handleEditSubmit(editedObj));
-    ///2.here i was creating another quiz instead of updating it
-    // const existingQuizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
-    // const updatedQuizzes = [...existingQuizzes, editedObj];
-    // localStorage.setItem("quizzes", JSON.stringify(updatedQuizzes));
-    /////new way trying : working fine
+
+    //
     const existingQuizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
     const quizIndex = existingQuizzes.findIndex(
       (quiz) => quiz.id === editedObj.id
@@ -140,51 +158,27 @@ function App() {
       const updatedQuizzes = [...existingQuizzes, editedObj];
       localStorage.setItem("quizzes", JSON.stringify(updatedQuizzes));
     }
-    /////new way trying end
+    //
 
     cancelUpdate();
   };
 
-  const [editValue, setEditValue] = useState("");
-  const [editDes, setEditDes] = useState("");
-  const [switchvalue, setswitchvalue] = useState(true);
-
-  const handleAddAnswerOptionE = (questionIndex) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].answerOptions.push({
-      answer: "",
-      checked: false,
-    });
-    setQuestions(updatedQuestions);
-  };
-
+  //when we start editing particular question in edit form
   const handleQuestionChangeE = (index, value) => {
     const updatedQuestions = [...questions];
     updatedQuestions[index].question = value;
     setQuestions(updatedQuestions);
   };
 
+  //when we start editing an answer option , i.e . we start writing in the textfield of the answer option that already have the answer option text
   const handleAnswerOptionChangeE = (questionIndex, answerIndex, value) => {
+    //using spread operator passing all questions
     const updatedQuestions = [...questions];
+    //updating that particular answer option
     updatedQuestions[questionIndex].answerOptions[answerIndex].answer = value;
+    //setting questions to updated questions
     setQuestions(updatedQuestions);
   };
-
-  // const handleCheckboxChangeE = (questionIndex, answerIndex) => {
-  //   const updatedQuestions = [...questions];
-  //   updatedQuestions[questionIndex].answerOptions[answerIndex].checked =
-  //     !updatedQuestions[questionIndex].answerOptions[answerIndex].checked;
-  //   setQuestions(updatedQuestions);
-  //   // setAtLeastOneCorrectAnswerEdit(true);
-  // };
-
-  ////
-  const [editQuizplay, setEditQuizplay] = useState("");
-  const [questionsplay, setQuestionsplay] = useState([]);
-  const [title, setTitle] = useState("");
-  console.log(editQuizplay, questionsplay);
-
-  ///
 
   useEffect(() => {
     setEditValue(editQuiz.todo);
@@ -223,10 +217,8 @@ function App() {
                   setEditDes={setEditDes}
                   questions={questions}
                   setQuestions={setQuestions}
-                  handleAddAnswerOptionE={handleAddAnswerOptionE}
                   handleQuestionChangeE={handleQuestionChangeE}
                   handleAnswerOptionChangeE={handleAnswerOptionChangeE}
-                  // handleCheckboxChangeE={handleCheckboxChangeE}
                   switchvalue={switchvalue}
                   setswitchvalue={setswitchvalue}
                   editError={editError}
@@ -234,6 +226,8 @@ function App() {
                   setAtLeastOneCorrectAnswerEdit={
                     setAtLeastOneCorrectAnswerEdit
                   }
+                  errInEdit={errInEdit}
+                  setErrInEdit={setErrInEdit}
                 />
               }
             />
@@ -264,7 +258,7 @@ function App() {
                 />
               }
             />
-            {/* <Route path="/quiz/:id" element={Quiz} />*/}
+
             <Route
               path="/result"
               element={

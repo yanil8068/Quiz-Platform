@@ -13,7 +13,7 @@ const initialStat = {
 
 export const usersReducer = (state = initialStat, actio) => {
   switch (actio.type) {
-    case SET_USER:
+    case SET_USER: //making currentUser to null when logout
       return {
         ...state,
         currentUser: actio.payload,
@@ -130,22 +130,27 @@ const initialState = [
 
 export const operationsReducer = (state = initialState, action) => {
   switch (action.type) {
+    //make quiz active or inactive
     case TOGGLE_QUIZ_COMPLETED:
       return state.map((quiz) =>
         quiz.id === action.payload
           ? { ...quiz, completed: !quiz.completed }
           : quiz
       );
+    //creating new quiz
     case ADD_QUIZ:
       return [...state, action.payload];
+    //deleting a particular quiz
     case REMOVE_QUIZ:
       const filteredQuizs = state.filter((quiz) => quiz.id !== action.payload);
       return filteredQuizs;
+    //editing and updating quiz
     case UPDATE_QUIZ:
       console.log(action.payload);
       return state.map((quiz) =>
         quiz.id === action.payload.id ? action.payload : quiz
       );
+    //delete a particular question from questions array in edit form
     case DELETE_QUESTION:
       return state.map((quiz) => {
         const updatedQuestions = quiz.questions.filter(

@@ -19,8 +19,9 @@ const Result = ({ score, TotalQuestion, setName }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: { sm: "flex-start", md: "center" },
         minHeight: "93vh",
+        m: 3,
       }}
     >
       <Card

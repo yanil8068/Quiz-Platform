@@ -132,9 +132,9 @@ const Home = () => {
         p: 2,
         pt: "1vh",
         minHeight: "100vh",
-        // bgcolor: "#D862BC",
       }}
     >
+      {/* card for create quiz */}
       <Card sx={{ width: { xs: "90%", md: "45%" }, overflow: "visible" }}>
         <CardActionArea component={Link} to="/new">
           <CardMedia
@@ -146,6 +146,7 @@ const Home = () => {
         </CardActionArea>
       </Card>
 
+      {/* card for My quizzes */}
       <Card sx={{ width: { xs: "90%", md: "45%" }, overflow: "visible" }}>
         <CardActionArea component={Link} to="/quizzes">
           <CardMedia
@@ -157,6 +158,7 @@ const Home = () => {
         </CardActionArea>
       </Card>
 
+      {/* card for Play quiz */}
       <Card sx={{ width: { xs: "90%", md: "45%" }, overflow: "visible" }}>
         <CardActionArea component={Link} to="/PlayQuizHome">
           <CardMedia

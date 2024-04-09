@@ -32,31 +32,35 @@ const PlayQuiz = ({
 
   const optionsLetters = ["A", "B", "C", "D"]; // Define array of letters for options
 
+  //when clicked on answer option
   const handleOptionClick = (optionIndex, optionAnswer) => {
     const newVariant = [...optionVariant];
     const newOptionColors = [...optionColors]; // Copy the current optionColors array
+    //if selected answer is correct
     if (optionAnswer) {
+      //increasing score
       setScore(score + 1);
+      //making color of that particular button to success
       newOptionColors[optionIndex] = "success"; // Set color to secondary for correct answer
       newVariant[optionIndex] = "contained";
-
-      // setCurrQues(currQues + 1)
     } else {
       newOptionColors[optionIndex] = "error"; // Set color to error for incorrect answer
       newVariant[optionIndex] = "contained";
     }
     setOptionColors(newOptionColors);
-    setdisablenext(!disablenext);
+    setdisablenext(!disablenext); //enabling the next button
     setAnswerSelected(true); // Set answer selected to true
-    setOptionVariant(newVariant);
+    setOptionVariant(newVariant); // set styling of options
   };
+
+  //when click on next button
   const gotonextquestion = () => {
-    setCurrQues(currQues + 1);
-    setdisablenext(!disablenext);
+    setCurrQues(currQues + 1); //setting question number
+    setdisablenext(!disablenext); //disabling the next button
     setOptionColors(Array(4).fill("primary")); // Reset option colors for the next question
     setAnswerSelected(false); // Reset answer selected state
     setButtonClicked(false); // Reset button clicked state
-    setOptionVariant(Array(4).fill("outlined"));
+    setOptionVariant(Array(4).fill("outlined")); // set styling of new options
   };
 
   return (
@@ -67,7 +71,6 @@ const PlayQuiz = ({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-
         bgcolor: "background.paper",
         p: 2,
         overflowY: "auto", // Enable vertical scrolling if needed
@@ -85,10 +88,14 @@ const PlayQuiz = ({
         },
       }}
     >
-      <Box sx={{ width: { xs: "92%", md: "75%", lg: "50%" } }}>
+      <Box
+        sx={{
+          width: { xs: "92%", md: "75%", lg: "50%" },
+        }}
+      >
         {questionsplay[currQues] ? (
-          <Box>
-            <Typography sx={{ textAlign: "right" }} variant="h4" gutterBottom>
+          <Box sx={{ border: "2px solid black", p: 2, borderRadius: "8px" }}>
+            <Typography sx={{ textAlign: "right" }} variant="h5" gutterBottom>
               name: {name}
             </Typography>
             <Typography
@@ -98,15 +105,15 @@ const PlayQuiz = ({
                 borderBottom: "2px solid grey",
               }}
               fullWidth
-              variant="h5"
+              variant="h4"
               gutterBottom
             >
               Quiz: {title}
             </Typography>
-            <Typography variant="h6" gutterBottom>
+            <Typography sx={{ fontWeight: "550" }} variant="h6" gutterBottom>
               {currQues + 1}. {questionsplay[currQues].question}
             </Typography>
-            {/* <ul> */}
+
             {questionsplay[currQues].answerOptions.map((option, index) => (
               <Button
                 variant={optionVariant[index]}
@@ -115,6 +122,7 @@ const PlayQuiz = ({
                   pointerEvents:
                     answerSelected || buttonClicked ? "none" : "auto",
                   width: "100%",
+                  color: "black",
                 }}
                 color={optionColors[index]} // Set button color based on optionColors state
                 onClick={() => handleOptionClick(index, option.checked)}
@@ -133,7 +141,11 @@ const PlayQuiz = ({
                 alignItems: "center",
               }}
             >
-              <Typography variant="h7" sx={{ mb: "2", mt: "2" }} gutterBottom>
+              <Typography
+                variant="h7"
+                sx={{ mb: "2", mt: "2", fontWeight: "500" }}
+                gutterBottom
+              >
                 question : {currQues}/{questionsplay.length}
               </Typography>
 
@@ -159,3 +171,5 @@ const PlayQuiz = ({
 };
 
 export default PlayQuiz;
+
+//option select => handleOptionClick => next => gotonextquestion => currQues === questionsplay.length => /result

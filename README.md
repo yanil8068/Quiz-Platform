@@ -5,7 +5,7 @@ The Quiz platform project aims to develop a web application enabling users to ta
 ## Deployment
 
 Deployed link:
-click here : https://peaceful-pavlova-9c8b43.netlify.app/
+click here : https://quizzyplatform.netlify.app/
 
 ## Tech Stack
 

@@ -122,10 +122,11 @@ const Header = () => {
               to="/"
               sx={{
                 color: "inherit",
-                "&:hover": { color: "green" },
+                "&:hover": { color: "#FF204E" },
                 marginRight: "10px",
                 textTransform: "none",
                 fontSize: { sm: "1.1rem", xs: "0.7rem" },
+                fontWeight: "650",
                 padding: { sm: 1, xs: 0 },
               }}
             >
@@ -137,10 +138,11 @@ const Header = () => {
               to="/quizzes"
               sx={{
                 color: "inherit",
-                "&:hover": { color: "green" },
+                "&:hover": { color: "#FF204E" },
                 marginRight: "10px",
                 textTransform: "none",
                 fontSize: { sm: "1.1rem", xs: "0.7rem" },
+                fontWeight: "650",
                 padding: { sm: 1, xs: 0 },
               }}
             >
@@ -152,10 +154,11 @@ const Header = () => {
               to="/PlayQuizHome"
               sx={{
                 color: "inherit",
-                "&:hover": { color: "green" },
+                "&:hover": { color: "#FF204E" },
 
                 textTransform: "none",
                 fontSize: { sm: "1.1rem", xs: "0.7rem" },
+                fontWeight: "650",
                 padding: { sm: 1, xs: 0 },
               }}
             >
@@ -166,10 +169,11 @@ const Header = () => {
               onClick={handleClickOpen}
               sx={{
                 color: "inherit",
-                "&:hover": { color: "green" },
+                "&:hover": { color: "#FF204E" },
 
                 textTransform: "none",
                 fontSize: { sm: "1.1rem", xs: "0.7rem" },
+                fontWeight: "650",
                 padding: { sm: 1, xs: 0 },
               }}
             >

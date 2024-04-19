@@ -9,7 +9,7 @@ click here : https://quizzyplatform.netlify.app/
 
 ## Tech Stack
 
-React ,React Router ,Redux ,Redux Thunk ,Material-UI ,Firebase.
+React JS,React Router ,Redux ,Redux Thunk ,Material-UI ,Firebase.
 
 ## Screenshots
 
